@@ -1,0 +1,116 @@
+{% extends 'board/post_list_heading.html' %}
+
+{% block content %}
+
+<div class="col-md-2"></div>
+<div class="col-md-8">
+    {% for post in posts %}
+        <div class="post-list-parent_1 post{{ post.pk }} col-md-8">
+            <div class="post-list-vote col-md-2">
+                      
+                  {% if user.is_authenticated %}
+                      {% if post in liked_posts %}
+                          <button type="button" class="btn btn-default-sm post-list-like-button" name="{{ post.id }}" style="background-color: #3eb991; color: white;" />
+                              <span class="glyphicon glyphicon-thumbs-up like_count post-list-like-text" aria-hidden="true" style="font-size: 16px;"></span><span> Added</span>
+                          </button>
+                      {% else %}
+                          <button type="button" class="btn btn-default-sm post-list-like-button" name="{{ post.id }}" style="background-color: #e01563; color: white;" />
+                              <span class="glyphicon glyphicon-thumbs-up like_count post-list-like-text" aria-hidden="true" style="font-size: 20px"></span>
+                          </button>
+                      {% endif %}
+                {% else %}
+                          <a href="{% url 'register' %}">
+                              <button type="button" class="btn btn-default-sm post-list-like-button" name="{{ post.id }}" style="background-color: #e01563; color: white;" />
+                                  <span class="glyphicon glyphicon-thumbs-up like_count post-list-like-text" aria-hidden="true" style="font-size: 20px;"></span>
+                              </button>
+                          </a>
+                {% endif %}
+
+            </div>
+            <a href="{% url 'post_detail' pk=post.pk %}">
+                <button class="post-list-to_should_section col-md-6 img-rounded">
+                    <span style="color:white;  font-weight: bold;">To </span><br><span style="color: #6ecadc;">{{ post.to_field }}</span><span style="color:white; font-weight: bold;">,</span>
+                    <br><br>
+                    <span style="color:white; font-weight: bold;">You should <br></span><span style="color: #e9a820;">{{ post.do_field }}</span><span style="color:white;">.</span>
+                </button>
+            </a>
+        </div>
+
+
+
+ 
+
+
+
+    {% endfor %}
+
+    {% if posts.has_other_pages %}
+      <div id="outer-pages">
+          <nav aria-label="Page navigation" id="inner-pages">
+            <ul class="pagination">
+              <li class="page-item">
+              {% if posts.has_previous %}
+                <a class="page-link" href="?page={{ posts.previous_page_number }}" aria-label="Previous">
+              {% else %}
+                <a class="page-link" id="dead-link" aria-label="Previous">
+              {% endif %}
+                  <span aria-hidden="true">&laquo;</span>
+                  <span class="sr-only">Previous</span>
+                </a>
+              </li>
+              <li class="page-item"><a class="page-link" id="dead-link">Page {{ posts.number }} of {{ posts.paginator.num_pages }}</a></li>
+              <li class="page-item">
+              {% if posts.has_next %}
+                <a class="page-link" href="?page={{ posts.next_page_number }}" aria-label="Previous">
+              {% else %}
+                <a class="page-link" aria-label="Next" id="dead-link">
+              {% endif %}
+                  <span aria-hidden="true">&raquo;</span>
+                  <span class="sr-only">Next</span>
+                </a>
+              </li>
+            </ul>
+          </nav>
+      </div>
+    {% endif %}
+
+</div>
+<div class="col-md-2"></div>
+
+
+{% if user.is_authenticated %}
+    <script>
+        $('.post-list-like-button').click(function(){
+            var pk = $(this).attr('name');
+            $.ajax({
+               type: "POST",
+               url: "{% url 'like_button' %}",
+               data: {'pk': pk, 'csrfmiddlewaretoken': '{{ csrf_token }}'},
+               dataType: "json",
+               success: function(response) {
+                      console.log('Post likes count is now ' + response.likes_count);
+          //          $('.like_count').html(response.likes_count);
+                      location.reload()
+                      console.log('this is like.');
+                },
+               error: function(response, e) {
+                      console.log('Something went wrong.');
+               }
+          });
+      })
+    </script>
+{% else %}
+    <script>
+    </script>
+{% endif %}
+
+
+{% endblock %}
+
+
+<!--<div class="post">
+    <h3>To <a href="{% url 'to_posts' to_field=post.to_field %}" class="to">{{ post.to_field }}</a>, you should <a href="{% url 'post_detail' pk=post.pk %}" class="do">{{ post.do_field }}</a>.</h3>
+    <p class="sub">Class: <a href="{% url 'clazz_posts' clazz=post.clazz %}"> {{ post.clazz }}</a> // Topics: <a>#influence</a>, <a>#persuasion</a>, <a>#hardpower</a></p>
+
+    <p class="sub">{{ post.published_date|date:"F n, Y" }}</p>
+</div>-->

@@ -1,0 +1,13 @@
+{% extends 'board/base.html' %}
+
+
+{% block content %}
+<div style="text-align: center;">
+    <h1>New comment</h1>
+    <p>Leave a comment on this tool's wall</p><br>
+    <form method="POST" class="post-form" style="font-size: 20px;">{% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn" style="width: 200px; height: 70px; font-size: 30px; margin-top: 30px; background-color: #e01563; color: white;">Save</button>
+    </form>
+</div>
+{% endblock %}

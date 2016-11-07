@@ -1,0 +1,16 @@
+{% extends "board/base.html" %}
+
+{% block title %}Create an account{% endblock %}
+
+{% block content %}
+<div style="margin-left: 100px;">
+  <h1>Create an account</h1>
+  <br>
+  <form action="" method="POST" class="post-form" style="font-size: 20px;">{% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" class="btn" style="width: 200px; height: 70px; font-size: 30px; margin-top: 30px; background-color: #e01563; color: white;">Create</button>
+  </form>
+
+</div>
+{% endblock %}
+
