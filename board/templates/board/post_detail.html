@@ -52,7 +52,7 @@
     <div class="col-md-5 detail-second-section">
         <h3><span class="detail-second-head">Proofpoints</span> 
           <a href="{% url 'proof_new' post=post.pk %}">
-            <span>(+Add Pointpoint)</span>
+            <span>(+Add Proofpoint)</span>
           </a>
         </h3>
         <div class="detail-second-example">
@@ -300,7 +300,7 @@
     {% else %}
         <script>
                 $('.detail-like-button').css('background-color', '#e01563').css('color', 'white');        
-                $('.detail-like-text').html('Add to your toolkit')
+                $('.detail-like-text').html('Add to your toolkiit')
                 $('.detail-like-button').click(function(){
                 var pk = $(this).attr('name');
                 $.ajax({
@@ -323,7 +323,7 @@
 {% else %}
     <script>
         $('.detail-like-button').css('background-color', '#e01563').css('color', 'white');        
-        $('.detail-like-text').html('Add me to your toolkit') 
+        $('.detail-like-text').html('Add to your toolkiit') 
     </script>
 {% endif %}
 

@@ -2,7 +2,7 @@
 {% load staticfiles %}
 <html lang="en">
     <head>
-        <title>the toolkit</title>
+        <title>Toolkiit</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
         <script src="{% static 'js/jQuery.js' %}"></script>
@@ -32,7 +32,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="{% url 'board.views.post_list' %}">the toolkit</a> <!--Better Together, Dissect greatness with science, Backed by Science, UpLevel, Science's most advanced social science research-for everyone, Dissecting greatness-for everyone, community of people who love self-improvement, closing the learning doing gap, problem is discovery/translation/doing, hackstac-->
+          <a class="navbar-brand" href="{% url 'board.views.post_list' %}">toolkiit</a> <!--Better Together, Dissect greatness with science, Backed by Science, UpLevel, Science's most advanced social science research-for everyone, Dissecting greatness-for everyone, community of people who love self-improvement, closing the learning doing gap, problem is discovery/translation/doing, hackstac-->
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -48,7 +48,7 @@
           <ul class="nav navbar-nav navbar-right">
             {% if user.is_authenticated %}
             <li><a href="{% url 'post_new' %}">+Add Tool</a></li>
-            <li><a href="{% url 'my_toolkit' %}">My Toolkit</a></li>
+            <li><a href="{% url 'my_toolkit' %}">My Toolkiit</a></li>
             <li><a href="{% url 'logout' %}">Log Out</a></li>
             {% else %}
             <li><a href="{% url 'login' %}">Sign In</a></li>
