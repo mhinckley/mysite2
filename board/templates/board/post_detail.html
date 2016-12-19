@@ -33,12 +33,12 @@
     <div class="col-md-10">
         {% if user.is_authenticated %}
             <button type="button" class="btn btn-default-sm detail-like-button" name="{{ post.id }}" />
-                <span class="glyphicon glyphicon-thumbs-up " aria-hidden="true"></span> <span class="like_count detail-like-text"></span>
+                <span class="glyphicon glyphicon-save " aria-hidden="true"></span> <span class="like_count detail-like-text"></span>
             </button>
         {% else %}
         <a href="{% url 'register' %}">
             <button type="button" class="btn btn-default-sm detail-like-button" />
-                <span class="glyphicon glyphicon-thumbs-up " aria-hidden="true"></span> <span class="like_count detail-like-text"></span>
+                <span class="glyphicon glyphicon-save " aria-hidden="true"></span> <span class="like_count detail-like-text"></span>
             </button>
         </a>
         {% endif %}
@@ -49,8 +49,67 @@
 
 <div class="row detail-second-row">
     <div class="col-md-2"></div>    
+      <div class="col-md-8 detail-second-section">
+            
+
+            <div>
+                <h3>
+                  <span class="detail-second-head">Created by </span><a href="{% url 'user_posts' author=post.author %}"><span class="detail-second-head">{{post.author}}</a>
+               </h3>
+                <div class="detail-second-summary">
+                  {% if post.person %}
+                      <span style="font-weight: bolder">{{ post.person }} - </span>
+                  {% endif %}
+
+                  {% if post.summary %}
+                      {{ post.summary }}
+                  {% endif %}
+
+                  {% if post.source_url %}
+                      [<a href="{{ post.source_url }}">link</a>]
+                  {% endif %}
+                </div>
+            </div>
+            <br>
+            <div>
+                <h3><span class="detail-second-head">More Proofpoints</span> 
+                  <a href="{% url 'proof_new' post=post.pk %}">
+                    <span>(+Add Proofpoint)</span>
+                  </a>
+                </h3>
+                <div class="detail-second-example">
+                    <ul>
+                        {% for proof in post.proof_set.all %}
+                              {% if proof.source_url %}
+                                  <li><span style="font-weight: bolder">{{ proof.person }} - </span> {{ proof.caption }} [<a href="{{ proof.source_url }}">link</a>]</li>
+                              {% else %}
+                                  <li><span style="font-weight: bolder">{{ proof.person }} - </span> {{ proof.caption }}</li>              
+                              {% endif %}
+
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+
+      </div>
+
+    <div class="col-md-2"></div>  
+</div>
+
+<!--        <div class="detail-second-social">
+                <button type="button" class="btn btn-default-sm like-button" name="{{ post.id }}" />
+                    <span class="glyphicon glyphicon-thumbs-up " aria-hidden="true"></span> <span class="like_count like-text"></span>
+                </button>
+                <button type="button" class="btn btn-default-sm like-button"  />
+                    <span class="glyphicon glyphicon-comment"></span> <span class="like_count">{{ post.total_comments }}</span>
+                </button>
+        </div>-->
+
+<!--
+<div class="row detail-second-row">
+    <div class="col-md-2"></div>    
     <div class="col-md-5 detail-second-section">
-        <h3><span class="detail-second-head">Proofpoints</span> 
+        <h3><span class="detail-second-head">More Proofpoints</span> 
           <a href="{% url 'proof_new' post=post.pk %}">
             <span>(+Add Proofpoint)</span>
           </a>
@@ -68,20 +127,12 @@
           <span class="detail-second-head">Notes by </span><a href="{% url 'user_posts' author=post.author %}"><span class="detail-second-head">{{post.author}}</a>
        </h3>
         <div class="detail-second-summary">{{ post.summary }}</div>
-<!--        <div class="detail-second-social">
-                <button type="button" class="btn btn-default-sm like-button" name="{{ post.id }}" />
-                    <span class="glyphicon glyphicon-thumbs-up " aria-hidden="true"></span> <span class="like_count like-text"></span>
-                </button>
-                <button type="button" class="btn btn-default-sm like-button"  />
-                    <span class="glyphicon glyphicon-comment"></span> <span class="like_count">{{ post.total_comments }}</span>
-                </button>
-        </div>-->
-
-
-
     </div>
     <div class="col-md-2"></div>  
-</div>
+</div> -->
+
+
+
 
 <div class="row detail-third-row">
     <div class="col-md-2"></div>    
@@ -277,7 +328,7 @@
     {% if post in liked_posts %}
         <script>
             $('.detail-like-button').css('background-color', '#3eb991').css('color', 'white');
-            $('.detail-like-text').html('Added')
+            $('.detail-like-text').html('Saved')
             $('.detail-like-button').click(function(){
                 var pk = $(this).attr('name');
                 $.ajax({
@@ -300,7 +351,7 @@
     {% else %}
         <script>
                 $('.detail-like-button').css('background-color', '#e01563').css('color', 'white');        
-                $('.detail-like-text').html('Add to your toolkiit')
+                $('.detail-like-text').html('Save to your toolkiit')
                 $('.detail-like-button').click(function(){
                 var pk = $(this).attr('name');
                 $.ajax({
@@ -323,7 +374,7 @@
 {% else %}
     <script>
         $('.detail-like-button').css('background-color', '#e01563').css('color', 'white');        
-        $('.detail-like-text').html('Add to your toolkiit') 
+        $('.detail-like-text').html('Save to your toolkiit') 
     </script>
 {% endif %}
 

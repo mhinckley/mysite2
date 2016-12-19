@@ -8,7 +8,7 @@ class PostForm(forms.ModelForm):
 
     class Meta:
         model = Post
-        fields = ('to_field','do_field','summary')
+        fields = ('to_field','do_field', 'person', 'source_url', 'summary')
 
 
 class EmailUserCreationForm(UserCreationForm):

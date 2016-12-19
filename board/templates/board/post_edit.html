@@ -4,10 +4,31 @@
 {% block content %}
 <div style="text-align: center;">
     <h1>New tool</h1>
-    <p>Share your influence tools</p><br>
-    <form method="POST" class="post-form" style="font-size: 20px;">{% csrf_token %}
-        {{ form.as_p }}
+    <p>Share your performance tools</p><br>
+
+		<form method="POST" class="post-form" style="font-size: 20px;">{% csrf_token %}
+		        <div class="row">
+		        		<div class="col-md-2"></div>		        	
+		        		<div class="col-md-4" id="to_field">To: <br>{{ form.to_field }}</div>
+		        		<div class="col-md-4" id="do_field">I should: <br>{{ form.do_field }}</div>
+		        		<div class="col-md-2"></div>
+	        	</div>
+	        	<br>
+		        <div class="row">
+		        		<div class="col-md-2"></div>		        	
+		        		<div class="col-md-4" id="person">Proofpoint: <br>{{ form.person }}</div>
+		        		<div class="col-md-4" id="source_url">Link: <br>{{ form.source_url }}</div>
+		        		<div class="col-md-2"></div>
+	        	</div>
+	        	<br>
+		        <div class="row">
+		        		<div class="col-md-2"></div>		        	
+		        		<div class="col-md-8" id="summary">More explanation: <br>{{ form.summary }}</div>
+		        		<div class="col-md-2"></div>
+	        	</div>
         <button type="submit" class="btn" style="width: 200px; height: 70px; font-size: 30px; margin-top: 30px; background-color: #e01563; color: white;">Save</button>
-    </form>
+		</form>
+
+
 </div>
 {% endblock %}

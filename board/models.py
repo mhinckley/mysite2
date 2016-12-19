@@ -6,9 +6,11 @@ from django.utils import timezone
 
 class Post(models.Model):
     author = models.ForeignKey('auth.User')
-    to_field = models.CharField(max_length=50)
+    to_field = models.CharField(max_length=55)
     do_field = models.CharField(max_length=75)
-    summary = models.TextField(max_length=400, blank=True, null=True)
+    person = models.CharField(max_length=100, blank=True, null=True)
+    source_url = models.URLField(max_length=500, blank=True, null=True)
+    summary = models.TextField(max_length=500, blank=True, null=True)
     clazz = models.CharField(max_length=50, default='Influence')
     likes = models.ManyToManyField('auth.User', related_name='likes')
     published_date = models.DateTimeField(
@@ -95,9 +97,9 @@ class Post(models.Model):
 
 class Proof(models.Model):
     author = models.ForeignKey('auth.User')
-    person = models.CharField(max_length=30)
-    source_url = models.URLField(max_length=300, blank=True, null=True)
-    caption = models.CharField(max_length=105, blank=True, null=True)
+    person = models.CharField(max_length=100)
+    source_url = models.URLField(max_length=500, blank=True, null=True)
+    caption = models.CharField(max_length=500, blank=True, null=True)
     post = models.ForeignKey(Post)
     created_date = models.DateTimeField(
             default=timezone.now)
