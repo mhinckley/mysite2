@@ -48,7 +48,10 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'board',
+    'django.contrib.sites', # Added to run management tasks
 )
+
+SITE_ID = 1 # Added to run management tasks, along with the installed Sites app above
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',

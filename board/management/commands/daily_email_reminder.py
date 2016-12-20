@@ -7,7 +7,7 @@ from django.template.loader import get_template
 from django.utils import timezone
 
 from django.contrib.auth.models import User
-from django.db.models import Post, Follow 
+import django.db.models  # couldn't find Post in traceback, so switched to this
 
 from libs import email_sender, helpers
 
