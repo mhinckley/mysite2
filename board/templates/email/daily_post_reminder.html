@@ -1,0 +1,16 @@
+{% extends "email/base.html" %}
+
+{% block content %}
+
+		{% for follow in daily_follows %}
+		                      
+        <a href="{% url 'post_detail' pk=post.pk %}">
+            <span style="color:red;  font-weight: bold;">To </span><br><span style="color: #6ecadc;">{{ follow.post.to_field }}</span><span style="color:white; font-weight: bold;">,</span>
+            <span style="color:blue; font-weight: bold;">you should <br></span><span style="color: #e9a820;">{{ follow.post.do_field }}</span>.</span>
+        </a>
+        <br>
+
+		{% endfor %}
+
+
+{% endblock %}

@@ -1,0 +1,53 @@
+<div style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 14px;">
+
+    <div style="padding-top: 11px; padding-bottom: 14px; color: #355E3B;">
+        <span style="display: inline-block;">
+            <span style="font-size: 30px; padding-top: 2px;">analysocial</span><br>
+        </span>
+    </div>
+
+    <hr>
+
+    <br>
+
+    <p>
+        Hello {{ full_name }},
+        <br><br>
+        {% block content %}{% endblock %}
+        <br><br>
+        Cheers!
+        <br>
+        {{ admin_name }}
+    </p>
+    <br>
+
+    <hr>
+
+    <div style="width: 100%; padding: 8px; text-align: center;">
+
+        <span
+          style="width: auto; display: inline-block; padding: 6px 12px; background-color: #355E3B; border-radius: 3px; cursor: pointer;">
+        <a style="text-decoration: none; color: #ffffff;" target="_blank"
+           href="{{ full_domain }}{% url 'facebook_posts' %}">
+          Check your posts
+        </a>
+        </span>
+
+        <div style="margin: 8px;">
+            Found a bug? Have a feature request?
+            <br>
+            Please
+            <a href="https://github.com/mhinckley/toolkiit/issues" target="_blank">
+                let us know</a>.
+
+        </div>
+
+        <span
+    style="width: auto; display: inline-block; padding: 6px 12px; background-color: #c0c0c0; border-radius: 3px; cursor: pointer;">
+            <a style="text-decoration: none; color: #000000;" target="_blank"
+       href="{{ full_domain }}{% url 'my_toolkit' %}">Disable email notifications</a>
+        </span>
+
+    </div>
+
+</div>
