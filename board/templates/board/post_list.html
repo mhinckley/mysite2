@@ -10,9 +10,10 @@
       <div class="col-md-2"></div>
         <div class="col-md-8">
             
-            <h1> Daily </h1>
+          <div>
+            <div class="col-md-12" style="margin-top: 30px; margin-bottom: -20px;"><h1>Daily Reminders</h1></div>
             {% for post in daily_posts %}
-                <div class="post-list-parent_1 post{{ post.pk }} col-md-8">
+                <div class="post-list-parent_1 post{{ post.pk }}">
                     <div class="post-list-vote col-md-2">
                         {% if post in liked_posts %}
                             <button type="button" class="btn btn-default-sm post-list-like-button" name="{{ post.id }}" style="background-color: #3eb991; color: white;" />
@@ -33,10 +34,12 @@
                     </a>
                 </div>
             {% endfor %}
-            
-            <h1> Weekly </h1>
+          </div>
+          
+          <div>
+            <div class="col-md-12" style="margin-top: 30px; margin-bottom: -20px;"><h1>Weekly Reminders</h1></div>
             {% for post in weekly_posts %}
-                <div class="post-list-parent_1 post{{ post.pk }} col-md-8">
+                <div class="post-list-parent_1 post{{ post.pk }}">
                     <div class="post-list-vote col-md-2">
                         {% if post in liked_posts %}
                             <button type="button" class="btn btn-default-sm post-list-like-button" name="{{ post.id }}" style="background-color: #3eb991; color: white;" />
@@ -57,10 +60,12 @@
                     </a>
                 </div>
             {% endfor %}
+          </div>
 
-            <h1> Monthly </h1>
+          <div>
+            <div class="col-md-12" style="margin-top: 30px; margin-bottom: -20px;"><h1>Monthly Reminders</h1></div>
             {% for post in monthly_posts %}
-                <div class="post-list-parent_1 post{{ post.pk }} col-md-8">
+                <div class="post-list-parent_1 post{{ post.pk }}">
                     <div class="post-list-vote col-md-2">
                         {% if post in liked_posts %}
                             <button type="button" class="btn btn-default-sm post-list-like-button" name="{{ post.id }}" style="background-color: #3eb991; color: white;" />
@@ -81,10 +86,12 @@
                     </a>
                 </div>
             {% endfor %}
+          </div>
 
-            <h1> Saved for later </h1>
+          <div>
+            <div class="col-md-12" style="margin-top: 30px; margin-bottom: -20px;"><h1>Saved for Later (But No Reminders)</h1></div>            
             {% for post in saved_for_later_posts %}
-                <div class="post-list-parent_1 post{{ post.pk }} col-md-8">
+                <div class="post-list-parent_1 post{{ post.pk }}">
                     <div class="post-list-vote col-md-2">
                         {% if post in liked_posts %}
                             <button type="button" class="btn btn-default-sm post-list-like-button" name="{{ post.id }}" style="background-color: #3eb991; color: white;" />
@@ -105,10 +112,12 @@
                     </a>
                 </div>
             {% endfor %}
+          </div>
 
-            <h1> Other Tools You Created </h1>
+          <div>
+            <div class="col-md-12" style="margin-top: 30px; margin-bottom: -20px;"><h1>Other Tools You Created</h1></div>            
             {% for post in my_remainder_posts %}
-                <div class="post-list-parent_1 post{{ post.pk }} col-md-8">
+                <div class="post-list-parent_1 post{{ post.pk }}">
                     <div class="post-list-vote col-md-2">
                         {% if post in liked_posts %}
                             <button type="button" class="btn btn-default-sm post-list-like-button" name="{{ post.id }}" style="background-color: #3eb991; color: white;" />
@@ -129,6 +138,7 @@
                     </a>
                 </div>
             {% endfor %}
+          </div>
 
 
         </div>
