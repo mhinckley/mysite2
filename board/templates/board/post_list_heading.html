@@ -4,114 +4,114 @@
 {% block post_list_heading %}
 
 		
-{% if request.path = "/" %}
+		{% if request.path = "/" %}
 
-  
+		  
 
-		<div style="
-		    max-height: 400px;
-		    margin-top: -50px;
-		    overflow: hidden;
-			  padding-bottom: 300px;
-		">
-			 	<img src="{% static 'images/steam_engine.jpg' %}" style="    
-		    min-width: 100%;
-		    min-height: 100%;
-		    margin-top: -20%;
-		    z-index: -1;
-		    ">
+				<div style="
+				    max-height: 400px;
+				    margin-top: -50px;
+				    overflow: hidden;
+					  padding-bottom: 300px;
+				">
+					 	<img src="{% static 'images/steam_engine.jpg' %}" style="    
+				    min-width: 100%;
+				    min-height: 100%;
+				    margin-top: -20%;
+				    z-index: -1;
+				    ">
 
-		</div>
-		<div style="
-		width: 100%;
-		top: 40%;
-		z-index:1;
-		color: white;
-		font-size: 40px;
-		font-weight: bold;
-		color: white;
-		text-align: center;
-		margin-top: -250px;
-		position: relative;
-		padding-bottom: 200px;">
+				</div>
+				<div style="
+				width: 100%;
+				top: 40%;
+				z-index:1;
+				color: white;
+				font-size: 40px;
+				font-weight: bold;
+				color: white;
+				text-align: center;
+				margin-top: -250px;
+				position: relative;
+				padding-bottom: 200px;">
 
-		<!--<p>To <span id="tagline-one">get better</span>, <span id="tagline-two">search here</span>.</p>-->
-		    <p>Share your secrets to performance,<br> and learn from others</p>
-		</div>
-		<div style="
-  				font-size: 30px;
-  				color: black;
-  				font-weight: bolder;
-  				text-align: center;
-  			">
-					<p>-- Latest Tools Shared --</p>
-		</div>
-<!--
-		</div>
-				<div class="row collection-panel">
-            <div class="panel-title"><h3>Popular Topics</h3></div>
-            <div class="panel-pic-container">
-                  <div class="col-md-3">
-                      <img src="{% static 'images/bulb.jpg' %}" class="img-rounded img-responsive images">
-                      <h3 class="img-text-container"><span class="background-color-two">Might</span></h3>
-                  </div>
-                  <div class="col-md-3">
-                      <img src="{% static 'images/power.jpg' %}" class="img-rounded img-responsive images">
-                      <h3 class="img-text-container"><span class="background-color-one">Allocentrism</span></h3>
-                  </div>
-                  <div class="col-md-3">
-                      <img src="{% static 'images/focus.jpg' %}" class="img-rounded img-responsive images">
-                      <h3 class="img-text-container"><span class="background-color-two">Coalitions</span></h3>
-                  </div>
-                  <div class="col-md-3">
-                      <img src="{% static 'images/speak.jpg' %}" class="img-rounded img-responsive images">
-                      <h3 class="img-text-container"><span class="background-color-one">Being multiple</span></h3>
-                  </div>
-            </div> 
-        </div>
--->
+				<!--<p>To <span id="tagline-one">get better</span>, <span id="tagline-two">search here</span>.</p>-->
+				    <p>Share your secrets to performance,<br> and learn from others</p>
+				</div>
+				<div style="
+		  				font-size: 30px;
+		  				color: black;
+		  				font-weight: bolder;
+		  				text-align: center;
+		  			">
+							<p>-- Latest Tools Shared --</p>
+				</div>
+		<!--
+				</div>
+						<div class="row collection-panel">
+		            <div class="panel-title"><h3>Popular Topics</h3></div>
+		            <div class="panel-pic-container">
+		                  <div class="col-md-3">
+		                      <img src="{% static 'images/bulb.jpg' %}" class="img-rounded img-responsive images">
+		                      <h3 class="img-text-container"><span class="background-color-two">Might</span></h3>
+		                  </div>
+		                  <div class="col-md-3">
+		                      <img src="{% static 'images/power.jpg' %}" class="img-rounded img-responsive images">
+		                      <h3 class="img-text-container"><span class="background-color-one">Allocentrism</span></h3>
+		                  </div>
+		                  <div class="col-md-3">
+		                      <img src="{% static 'images/focus.jpg' %}" class="img-rounded img-responsive images">
+		                      <h3 class="img-text-container"><span class="background-color-two">Coalitions</span></h3>
+		                  </div>
+		                  <div class="col-md-3">
+		                      <img src="{% static 'images/speak.jpg' %}" class="img-rounded img-responsive images">
+		                      <h3 class="img-text-container"><span class="background-color-one">Being multiple</span></h3>
+		                  </div>
+		            </div> 
+		        </div>
+		-->
 
 
 
-		
-{% elif request.path = "/posts/mytoolkit/" %}
-		<div style="
-  				font-size: 30px;
-  				color: black;
-  				font-weight: bolder;
-  				text-align: center;
-  			">
-					<p>-- My Toolkiit --</p>
-		</div>
-		<div style="
-  				font-size: 20px;
-  				color: black;
-  				text-align: center;
-  				margin-bottom: 30px;
-  			">
-					<p>Tools you've saved to your Toolkiit	</p>
-		</div>
+				
+		{% elif request.path = "/posts/mytoolkit/" %}
+				<div style="
+		  				font-size: 30px;
+		  				color: black;
+		  				font-weight: bolder;
+		  				text-align: center;
+		  			">
+							<p>-- My Toolkiit --</p>
+				</div>
+				<div style="
+		  				font-size: 20px;
+		  				color: black;
+		  				text-align: center;
+		  				margin-bottom: 30px;
+		  			">
+							<p>Tools you've saved to your Toolkiit	</p>
+				</div>
 
-{% else %}
-		<div style="
-  				font-size: 30px;
-  				color: black;
-  				font-weight: bolder;
-  				text-align: center;
-  			">
-					<p>-- Search results --</p>
-		</div>
-		<div style="
-  				font-size: 20px;
-  				color: black;
-  				text-align: center;
-  				margin-bottom: 30px;
-  			">
-					<p><a href="{% url 'board.views.post_list' %}">Back to home</a></p>
-		</div>
-		 
+		{% else %}
+				<div style="
+		  				font-size: 30px;
+		  				color: black;
+		  				font-weight: bolder;
+		  				text-align: center;
+		  			">
+							<p>-- Search results --</p>
+				</div>
+				<div style="
+		  				font-size: 20px;
+		  				color: black;
+		  				text-align: center;
+		  				margin-bottom: 30px;
+		  			">
+							<p><a href="{% url 'board.views.post_list' %}">Back to home</a></p>
+				</div>
+				 
 
-{% endif %} 
+		{% endif %} 
 
 
 

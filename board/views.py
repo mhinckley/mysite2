@@ -79,8 +79,32 @@ def to_posts(request, to_field):
     return render(request, 'board/post_list.html', {'posts': posts})
 
 def my_toolkit(request):
+    user = request.user
     posts = Post.objects.filter(likes=request.user.pk).order_by('-published_date')
     liked_posts = Post.objects.filter(likes=request.user.pk)
+    my_posts = Post.objects.filter(author=request.user.pk).order_by('-published_date')
+
+    daily_follows = user.follow_set.filter(frequency=1)
+    daily_post_ids = daily_follows.values_list('post')
+    daily_posts = Post.objects.filter(id__in=daily_post_ids)
+    
+    weekly_follows = user.follow_set.filter(frequency=3)
+    weekly_post_ids = weekly_follows.values_list('post')
+    weekly_posts = Post.objects.filter(id__in=weekly_post_ids)
+
+    monthly_follows = user.follow_set.filter(frequency=6)
+    monthly_post_ids = monthly_follows.values_list('post')
+    monthly_posts = Post.objects.filter(id__in=monthly_post_ids)
+
+    # Get all remaining posts that user has saved
+    all_follow_posts_ids = daily_post_ids | weekly_post_ids | monthly_post_ids # Combining Query Sets
+    saved_for_later_posts = liked_posts.exclude(id__in=all_follow_posts_ids)
+    saved_for_later_post_ids = saved_for_later_posts.values_list('id')
+
+    # Get all remaining posts that user has created
+    my_remainder_posts = my_posts.exclude(id__in=saved_for_later_post_ids).exclude(id__in=all_follow_posts_ids)
+
+
     paginator = Paginator(posts, 10)
     page = request.GET.get('page')
     try:
@@ -92,8 +116,9 @@ def my_toolkit(request):
         # If page is out of range (e.g. 9999), deliver last page of results.
         posts = paginator.page(paginator.num_pages)
 
-    return render(request, 'board/post_list.html', {'posts': posts, 'liked_posts': liked_posts})
-
+    return render(request, 'board/post_list.html', {'posts': posts, 'liked_posts': liked_posts,
+        'daily_posts': daily_posts, 'weekly_posts': weekly_posts, 'monthly_posts': monthly_posts,
+        'saved_for_later_posts': saved_for_later_posts, 'my_remainder_posts': my_remainder_posts})
 
 
 

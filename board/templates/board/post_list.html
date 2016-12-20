@@ -1,105 +1,241 @@
 {% extends 'board/post_list_heading.html' %}
 
+
+
 {% block content %}
 
-<div class="col-md-2"></div>
-<div class="col-md-8">
-    {% for post in posts %}
-        <div class="post-list-parent_1 post{{ post.pk }} col-md-8">
-            <div class="post-list-vote col-md-2">
-                      
-                  {% if user.is_authenticated %}
-                      {% if post in liked_posts %}
-                          <button type="button" class="btn btn-default-sm post-list-like-button" name="{{ post.id }}" style="background-color: #3eb991; color: white;" />
-                              <span class="glyphicon glyphicon-saved like_count post-list-like-text" aria-hidden="true" style="font-size: 25px;"></span><span></span>
-                          </button>
-                      {% else %}
-                          <button type="button" class="btn btn-default-sm post-list-like-button" name="{{ post.id }}" style="background-color: #e01563; color: white;" />
-                              <span class="glyphicon glyphicon-save like_count post-list-like-text" aria-hidden="true" style="font-size: 16px"></span><span> Save</span>
-                          </button>
-                      {% endif %}
-                {% else %}
-                          <a href="{% url 'register' %}">
-                              <button type="button" class="btn btn-default-sm post-list-like-button" name="{{ post.id }}" style="background-color: #e01563; color: white;" />
-                                  <span class="glyphicon glyphicon-save like_count post-list-like-text" aria-hidden="true" style="font-size: 16px;"></span><span> Save</span>
-                              </button>
-                          </a>
-                {% endif %}
+  <!-- IF MY TOOLKIT -->
+  {% if request.path = "/posts/mytoolkit/" %}
 
-            </div>
-            <a href="{% url 'post_detail' pk=post.pk %}">
-                <button class="post-list-to_should_section col-md-6 img-rounded">
-                    <span style="color:white;  font-weight: bold;">To </span><br><span style="color: #6ecadc;">{{ post.to_field }}</span><span style="color:white; font-weight: bold;">,</span>
-                    <br><br>
-                    <span style="color:white; font-weight: bold;">You should <br></span><span style="color: #e9a820;">{{ post.do_field }}</span><span style="color:white; font-weight: bold;">.</span>
-                </button>
-            </a>
+      <div class="col-md-2"></div>
+        <div class="col-md-8">
+            
+            <h1> Daily </h1>
+            {% for post in daily_posts %}
+                <div class="post-list-parent_1 post{{ post.pk }} col-md-8">
+                    <div class="post-list-vote col-md-2">
+                        {% if post in liked_posts %}
+                            <button type="button" class="btn btn-default-sm post-list-like-button" name="{{ post.id }}" style="background-color: #3eb991; color: white;" />
+                                <span class="glyphicon glyphicon-saved like_count post-list-like-text" aria-hidden="true" style="font-size: 25px;"></span><span></span>
+                            </button>
+                        {% else %}
+                            <button type="button" class="btn btn-default-sm post-list-like-button" name="{{ post.id }}" style="background-color: #e01563; color: white;" />
+                                <span class="glyphicon glyphicon-save like_count post-list-like-text" aria-hidden="true" style="font-size: 16px"></span><span> Save</span>
+                            </button>
+                        {% endif %}
+                    </div>
+                    <a href="{% url 'post_detail' pk=post.pk %}">
+                        <button class="post-list-to_should_section col-md-6 img-rounded">
+                            <span style="color:white;  font-weight: bold;">To </span><br><span style="color: #6ecadc;">{{ post.to_field }}</span><span style="color:white; font-weight: bold;">,</span>
+                            <br><br>
+                            <span style="color:white; font-weight: bold;">You should <br></span><span style="color: #e9a820;">{{ post.do_field }}</span><span style="color:white; font-weight: bold;">.</span>
+                        </button>
+                    </a>
+                </div>
+            {% endfor %}
+            
+            <h1> Weekly </h1>
+            {% for post in weekly_posts %}
+                <div class="post-list-parent_1 post{{ post.pk }} col-md-8">
+                    <div class="post-list-vote col-md-2">
+                        {% if post in liked_posts %}
+                            <button type="button" class="btn btn-default-sm post-list-like-button" name="{{ post.id }}" style="background-color: #3eb991; color: white;" />
+                                <span class="glyphicon glyphicon-saved like_count post-list-like-text" aria-hidden="true" style="font-size: 25px;"></span><span></span>
+                            </button>
+                        {% else %}
+                            <button type="button" class="btn btn-default-sm post-list-like-button" name="{{ post.id }}" style="background-color: #e01563; color: white;" />
+                                <span class="glyphicon glyphicon-save like_count post-list-like-text" aria-hidden="true" style="font-size: 16px"></span><span> Save</span>
+                            </button>
+                        {% endif %}
+                    </div>
+                    <a href="{% url 'post_detail' pk=post.pk %}">
+                        <button class="post-list-to_should_section col-md-6 img-rounded">
+                            <span style="color:white;  font-weight: bold;">To </span><br><span style="color: #6ecadc;">{{ post.to_field }}</span><span style="color:white; font-weight: bold;">,</span>
+                            <br><br>
+                            <span style="color:white; font-weight: bold;">You should <br></span><span style="color: #e9a820;">{{ post.do_field }}</span><span style="color:white; font-weight: bold;">.</span>
+                        </button>
+                    </a>
+                </div>
+            {% endfor %}
+
+            <h1> Monthly </h1>
+            {% for post in monthly_posts %}
+                <div class="post-list-parent_1 post{{ post.pk }} col-md-8">
+                    <div class="post-list-vote col-md-2">
+                        {% if post in liked_posts %}
+                            <button type="button" class="btn btn-default-sm post-list-like-button" name="{{ post.id }}" style="background-color: #3eb991; color: white;" />
+                                <span class="glyphicon glyphicon-saved like_count post-list-like-text" aria-hidden="true" style="font-size: 25px;"></span><span></span>
+                            </button>
+                        {% else %}
+                            <button type="button" class="btn btn-default-sm post-list-like-button" name="{{ post.id }}" style="background-color: #e01563; color: white;" />
+                                <span class="glyphicon glyphicon-save like_count post-list-like-text" aria-hidden="true" style="font-size: 16px"></span><span> Save</span>
+                            </button>
+                        {% endif %}
+                    </div>
+                    <a href="{% url 'post_detail' pk=post.pk %}">
+                        <button class="post-list-to_should_section col-md-6 img-rounded">
+                            <span style="color:white;  font-weight: bold;">To </span><br><span style="color: #6ecadc;">{{ post.to_field }}</span><span style="color:white; font-weight: bold;">,</span>
+                            <br><br>
+                            <span style="color:white; font-weight: bold;">You should <br></span><span style="color: #e9a820;">{{ post.do_field }}</span><span style="color:white; font-weight: bold;">.</span>
+                        </button>
+                    </a>
+                </div>
+            {% endfor %}
+
+            <h1> Saved for later </h1>
+            {% for post in saved_for_later_posts %}
+                <div class="post-list-parent_1 post{{ post.pk }} col-md-8">
+                    <div class="post-list-vote col-md-2">
+                        {% if post in liked_posts %}
+                            <button type="button" class="btn btn-default-sm post-list-like-button" name="{{ post.id }}" style="background-color: #3eb991; color: white;" />
+                                <span class="glyphicon glyphicon-saved like_count post-list-like-text" aria-hidden="true" style="font-size: 25px;"></span><span></span>
+                            </button>
+                        {% else %}
+                            <button type="button" class="btn btn-default-sm post-list-like-button" name="{{ post.id }}" style="background-color: #e01563; color: white;" />
+                                <span class="glyphicon glyphicon-save like_count post-list-like-text" aria-hidden="true" style="font-size: 16px"></span><span> Save</span>
+                            </button>
+                        {% endif %}
+                    </div>
+                    <a href="{% url 'post_detail' pk=post.pk %}">
+                        <button class="post-list-to_should_section col-md-6 img-rounded">
+                            <span style="color:white;  font-weight: bold;">To </span><br><span style="color: #6ecadc;">{{ post.to_field }}</span><span style="color:white; font-weight: bold;">,</span>
+                            <br><br>
+                            <span style="color:white; font-weight: bold;">You should <br></span><span style="color: #e9a820;">{{ post.do_field }}</span><span style="color:white; font-weight: bold;">.</span>
+                        </button>
+                    </a>
+                </div>
+            {% endfor %}
+
+            <h1> Other Tools You Created </h1>
+            {% for post in my_remainder_posts %}
+                <div class="post-list-parent_1 post{{ post.pk }} col-md-8">
+                    <div class="post-list-vote col-md-2">
+                        {% if post in liked_posts %}
+                            <button type="button" class="btn btn-default-sm post-list-like-button" name="{{ post.id }}" style="background-color: #3eb991; color: white;" />
+                                <span class="glyphicon glyphicon-saved like_count post-list-like-text" aria-hidden="true" style="font-size: 25px;"></span><span></span>
+                            </button>
+                        {% else %}
+                            <button type="button" class="btn btn-default-sm post-list-like-button" name="{{ post.id }}" style="background-color: #e01563; color: white;" />
+                                <span class="glyphicon glyphicon-save like_count post-list-like-text" aria-hidden="true" style="font-size: 16px"></span><span> Save</span>
+                            </button>
+                        {% endif %}
+                    </div>
+                    <a href="{% url 'post_detail' pk=post.pk %}">
+                        <button class="post-list-to_should_section col-md-6 img-rounded">
+                            <span style="color:white;  font-weight: bold;">To </span><br><span style="color: #6ecadc;">{{ post.to_field }}</span><span style="color:white; font-weight: bold;">,</span>
+                            <br><br>
+                            <span style="color:white; font-weight: bold;">You should <br></span><span style="color: #e9a820;">{{ post.do_field }}</span><span style="color:white; font-weight: bold;">.</span>
+                        </button>
+                    </a>
+                </div>
+            {% endfor %}
+
+
         </div>
- 
+        <div class="col-md-2"></div>
 
 
 
-    {% endfor %}
+  <!-- IF NOT MY TOOLKIT-->
+  {% else %}
 
-    {% if posts.has_other_pages %}
-      <div id="outer-pages">
-          <nav aria-label="Page navigation" id="inner-pages">
-            <ul class="pagination">
-              <li class="page-item">
-              {% if posts.has_previous %}
-                <a class="page-link" href="?page={{ posts.previous_page_number }}" aria-label="Previous">
-              {% else %}
-                <a class="page-link" id="dead-link" aria-label="Previous">
-              {% endif %}
-                  <span aria-hidden="true">&laquo;</span>
-                  <span class="sr-only">Previous</span>
-                </a>
-              </li>
-              <li class="page-item"><a class="page-link" id="dead-link">Page {{ posts.number }} of {{ posts.paginator.num_pages }}</a></li>
-              <li class="page-item">
-              {% if posts.has_next %}
-                <a class="page-link" href="?page={{ posts.next_page_number }}" aria-label="Previous">
-              {% else %}
-                <a class="page-link" aria-label="Next" id="dead-link">
-              {% endif %}
-                  <span aria-hidden="true">&raquo;</span>
-                  <span class="sr-only">Next</span>
-                </a>
-              </li>
-            </ul>
-          </nav>
-      </div>
-    {% endif %}
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            {% for post in posts %}
+                <div class="post-list-parent_1 post{{ post.pk }} col-md-8">
+                    <div class="post-list-vote col-md-2">
+                              
+                          {% if user.is_authenticated %}
+                              {% if post in liked_posts %}
+                                  <button type="button" class="btn btn-default-sm post-list-like-button" name="{{ post.id }}" style="background-color: #3eb991; color: white;" />
+                                      <span class="glyphicon glyphicon-saved like_count post-list-like-text" aria-hidden="true" style="font-size: 25px;"></span><span></span>
+                                  </button>
+                              {% else %}
+                                  <button type="button" class="btn btn-default-sm post-list-like-button" name="{{ post.id }}" style="background-color: #e01563; color: white;" />
+                                      <span class="glyphicon glyphicon-save like_count post-list-like-text" aria-hidden="true" style="font-size: 16px"></span><span> Save</span>
+                                  </button>
+                              {% endif %}
+                        {% else %}
+                                  <a href="{% url 'register' %}">
+                                      <button type="button" class="btn btn-default-sm post-list-like-button" name="{{ post.id }}" style="background-color: #e01563; color: white;" />
+                                          <span class="glyphicon glyphicon-save like_count post-list-like-text" aria-hidden="true" style="font-size: 16px;"></span><span> Save</span>
+                                      </button>
+                                  </a>
+                        {% endif %}
 
-</div>
-<div class="col-md-2"></div>
+                    </div>
+                    <a href="{% url 'post_detail' pk=post.pk %}">
+                        <button class="post-list-to_should_section col-md-6 img-rounded">
+                            <span style="color:white;  font-weight: bold;">To </span><br><span style="color: #6ecadc;">{{ post.to_field }}</span><span style="color:white; font-weight: bold;">,</span>
+                            <br><br>
+                            <span style="color:white; font-weight: bold;">You should <br></span><span style="color: #e9a820;">{{ post.do_field }}</span><span style="color:white; font-weight: bold;">.</span>
+                        </button>
+                    </a>
+                </div>
+
+            {% endfor %}
 
 
-{% if user.is_authenticated %}
-    <script>
-        $('.post-list-like-button').click(function(){
-            var pk = $(this).attr('name');
-            $.ajax({
-               type: "POST",
-               url: "{% url 'like_button' %}",
-               data: {'pk': pk, 'csrfmiddlewaretoken': '{{ csrf_token }}'},
-               dataType: "json",
-               success: function(response) {
-                      console.log('Post likes count is now ' + response.likes_count);
-          //          $('.like_count').html(response.likes_count);
-                      location.reload()
-                      console.log('this is like.');
-                },
-               error: function(response, e) {
-                      console.log('Something went wrong.');
-               }
-          });
-      })
-    </script>
-{% else %}
-    <script>
-    </script>
-{% endif %}
+
+            {% if posts.has_other_pages %}
+              <div id="outer-pages">
+                  <nav aria-label="Page navigation" id="inner-pages">
+                    <ul class="pagination">
+                      <li class="page-item">
+                      {% if posts.has_previous %}
+                        <a class="page-link" href="?page={{ posts.previous_page_number }}" aria-label="Previous">
+                      {% else %}
+                        <a class="page-link" id="dead-link" aria-label="Previous">
+                      {% endif %}
+                          <span aria-hidden="true">&laquo;</span>
+                          <span class="sr-only">Previous</span>
+                        </a>
+                      </li>
+                      <li class="page-item"><a class="page-link" id="dead-link">Page {{ posts.number }} of {{ posts.paginator.num_pages }}</a></li>
+                      <li class="page-item">
+                      {% if posts.has_next %}
+                        <a class="page-link" href="?page={{ posts.next_page_number }}" aria-label="Previous">
+                      {% else %}
+                        <a class="page-link" aria-label="Next" id="dead-link">
+                      {% endif %}
+                          <span aria-hidden="true">&raquo;</span>
+                          <span class="sr-only">Next</span>
+                        </a>
+                      </li>
+                    </ul>
+                  </nav>
+              </div>
+            {% endif %}
+
+        </div>
+        <div class="col-md-2"></div>
+
+  <!--END OF IF STATEMENT FOR MYTOOLKIT-->
+  {% endif %}
+
+
+  {% if user.is_authenticated %}
+      <script>
+          $('.post-list-like-button').click(function(){
+              var pk = $(this).attr('name');
+              $.ajax({
+                 type: "POST",
+                 url: "{% url 'like_button' %}",
+                 data: {'pk': pk, 'csrfmiddlewaretoken': '{{ csrf_token }}'},
+                 dataType: "json",
+                 success: function(response) {
+                        console.log('Post likes count is now ' + response.likes_count);
+            //          $('.like_count').html(response.likes_count);
+                        location.reload()
+                        console.log('this is like.');
+                  },
+                 error: function(response, e) {
+                        console.log('Something went wrong.');
+                 }
+            });
+        })
+      </script>
+  {% endif %}
 
 
 {% endblock %}
