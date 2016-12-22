@@ -1,0 +1,94 @@
+1482297385150	geckodriver	INFO	Listening on 127.0.0.1:55681
+1482297443407	geckodriver	INFO	Listening on 127.0.0.1:55694
+1482297444411	mozprofile::profile	INFO	Using profile path /var/folders/0w/jw3z1wgj3k3b00rgddkctrnm0000gp/T/rust_mozprofile.n45Ba0J0Jnrb
+1482297444412	geckodriver::marionette	INFO	Starting browser /Users/mhinckley/Desktop/projects/coding/mysite/board/management/commands
+1482297744677	geckodriver	INFO	Listening on 127.0.0.1:55784
+1482297745671	mozprofile::profile	INFO	Using profile path /var/folders/0w/jw3z1wgj3k3b00rgddkctrnm0000gp/T/rust_mozprofile.qLN4TwCRyBxG
+1482297745672	geckodriver::marionette	INFO	Starting browser /Users/mhinckley/Desktop/projects/coding/mysite/board/management/commands
+1482298004936	geckodriver	INFO	Listening on 127.0.0.1:55835
+1482298005926	mozprofile::profile	INFO	Using profile path /var/folders/0w/jw3z1wgj3k3b00rgddkctrnm0000gp/T/rust_mozprofile.o0gbn9yq3lty
+1482298005927	geckodriver::marionette	INFO	Starting browser /Users/mhinckley/Desktop/projects/coding/mysite/board/management/commands
+1482298010423	geckodriver	INFO	Listening on 127.0.0.1:55845
+1482298011424	mozprofile::profile	INFO	Using profile path /var/folders/0w/jw3z1wgj3k3b00rgddkctrnm0000gp/T/rust_mozprofile.uFhu3LegFTT2
+1482298011425	geckodriver::marionette	INFO	Starting browser /Users/mhinckley/Desktop/projects/coding/mysite/board/management/commands
+1482298015671	geckodriver	INFO	Listening on 127.0.0.1:55855
+1482298016672	mozprofile::profile	INFO	Using profile path /var/folders/0w/jw3z1wgj3k3b00rgddkctrnm0000gp/T/rust_mozprofile.9sIFt4BQ8LBI
+1482298016673	geckodriver::marionette	INFO	Starting browser /Users/mhinckley/Desktop/projects/coding/mysite/board/management/commands
+1482298020629	geckodriver	INFO	Listening on 127.0.0.1:55865
+1482298021629	mozprofile::profile	INFO	Using profile path /var/folders/0w/jw3z1wgj3k3b00rgddkctrnm0000gp/T/rust_mozprofile.uCu5ahGFMy85
+1482298021630	geckodriver::marionette	INFO	Starting browser /Users/mhinckley/Desktop/projects/coding/mysite/board/management/commands
+1482298088198	geckodriver	INFO	Listening on 127.0.0.1:56102
+1482298089199	mozprofile::profile	INFO	Using profile path /var/folders/0w/jw3z1wgj3k3b00rgddkctrnm0000gp/T/rust_mozprofile.TWafAnpIzacB
+1482298089199	geckodriver::marionette	INFO	Starting browser /Users/mhinckley/Desktop/projects/coding/mysite/board/management/commands
+1482298094210	geckodriver	INFO	Listening on 127.0.0.1:56115
+1482298095216	mozprofile::profile	INFO	Using profile path /var/folders/0w/jw3z1wgj3k3b00rgddkctrnm0000gp/T/rust_mozprofile.0Rw8Tk7Noj7Y
+1482298095217	geckodriver::marionette	INFO	Starting browser /Users/mhinckley/Desktop/projects/coding/mysite/board/management/commands
+1482298097951	geckodriver	INFO	Listening on 127.0.0.1:56126
+1482298098954	mozprofile::profile	INFO	Using profile path /var/folders/0w/jw3z1wgj3k3b00rgddkctrnm0000gp/T/rust_mozprofile.SfmJIRPY6sKL
+1482298098954	geckodriver::marionette	INFO	Starting browser /Users/mhinckley/Desktop/projects/coding/mysite/board/management/commands
+1482298260961	geckodriver	INFO	Listening on 127.0.0.1:56268
+1482298261966	mozprofile::profile	INFO	Using profile path /var/folders/0w/jw3z1wgj3k3b00rgddkctrnm0000gp/T/rust_mozprofile.fA03OrjGyNz7
+1482298261966	geckodriver::marionette	INFO	Starting browser /Users/mhinckley/Desktop/projects/coding/mysite/board/management/commands
+1482298267162	geckodriver	INFO	Listening on 127.0.0.1:56278
+1482298268162	mozprofile::profile	INFO	Using profile path /var/folders/0w/jw3z1wgj3k3b00rgddkctrnm0000gp/T/rust_mozprofile.aWKUxyvfsuuw
+1482298268163	geckodriver::marionette	INFO	Starting browser /Users/mhinckley/Desktop/projects/coding/mysite/board/management/commands
+1482298338485	geckodriver	INFO	Listening on 127.0.0.1:56357
+1482298339489	mozprofile::profile	INFO	Using profile path /var/folders/0w/jw3z1wgj3k3b00rgddkctrnm0000gp/T/rust_mozprofile.OA5FgdAZvU8m
+1482298339490	geckodriver::marionette	INFO	Starting browser /Users/mhinckley/Desktop/projects/coding/mysite/board/management/commands
+1482298353740	geckodriver	INFO	Listening on 127.0.0.1:56367
+1482298354743	mozprofile::profile	INFO	Using profile path /var/folders/0w/jw3z1wgj3k3b00rgddkctrnm0000gp/T/rust_mozprofile.xHD20dZ8ZtTW
+1482298354744	geckodriver::marionette	INFO	Starting browser /Users/mhinckley/Desktop/projects/coding/mysite/board/management/commands
+1482362894797	geckodriver	INFO	Listening on 127.0.0.1:64972
+1482362895775	mozprofile::profile	INFO	Using profile path /var/folders/0w/jw3z1wgj3k3b00rgddkctrnm0000gp/T/rust_mozprofile.WMLCnTEEMC0w
+1482362895776	geckodriver::marionette	INFO	Starting browser /Users/mhinckley/Desktop/projects/coding/mysite/board/management/commands
+1482362910020	geckodriver	INFO	Listening on 127.0.0.1:64983
+1482362911023	mozprofile::profile	INFO	Using profile path /var/folders/0w/jw3z1wgj3k3b00rgddkctrnm0000gp/T/rust_mozprofile.1xtBuoPYNtnT
+1482362911024	geckodriver::marionette	INFO	Starting browser /Users/mhinckley/Desktop/projects/coding/mysite/board/management/commands
+1482363077059	geckodriver	INFO	Listening on 127.0.0.1:65072
+1482363078055	mozprofile::profile	INFO	Using profile path /var/folders/0w/jw3z1wgj3k3b00rgddkctrnm0000gp/T/rust_mozprofile.uZwrjB1VWObj
+1482363078056	geckodriver::marionette	INFO	Starting browser /Users/mhinckley/Applications/Firefox.app
+1482363107752	geckodriver	INFO	Listening on 127.0.0.1:65084
+1482363108755	mozprofile::profile	INFO	Using profile path /var/folders/0w/jw3z1wgj3k3b00rgddkctrnm0000gp/T/rust_mozprofile.l2OfPXl0blQS
+1482363108756	geckodriver::marionette	INFO	Starting browser /Users/mhinckley/Applications/Firefox.app
+1482363179142	geckodriver	INFO	Listening on 127.0.0.1:65098
+1482363180143	mozprofile::profile	INFO	Using profile path /var/folders/0w/jw3z1wgj3k3b00rgddkctrnm0000gp/T/rust_mozprofile.1JNb8R7Q8STm
+1482363180144	geckodriver::marionette	INFO	Starting browser /Users/mhinckley/Applications/Firefox.app/Contents/MacOS/firefox-bin
+1482363185224	geckodriver	INFO	Listening on 127.0.0.1:65108
+1482363186226	mozprofile::profile	INFO	Using profile path /var/folders/0w/jw3z1wgj3k3b00rgddkctrnm0000gp/T/rust_mozprofile.uIizdHPXKtHJ
+1482363186227	geckodriver::marionette	INFO	Starting browser /Users/mhinckley/Applications/Firefox.app/Contents/MacOS/firefox-bin
+1482363812058	geckodriver	INFO	Listening on 127.0.0.1:65237
+1482363813063	mozprofile::profile	INFO	Using profile path /var/folders/0w/jw3z1wgj3k3b00rgddkctrnm0000gp/T/rust_mozprofile.RuwlMcgQvBOS
+1482363813064	geckodriver::marionette	INFO	Starting browser /Users/mhinckley/Applications/Firefox.app/Contents/MacOS/firefox-bin
+1482447861725	geckodriver	INFO	Listening on 127.0.0.1:58291
+1482447862708	mozprofile::profile	INFO	Using profile path /var/folders/0w/jw3z1wgj3k3b00rgddkctrnm0000gp/T/rust_mozprofile.MpsTmFKhfoyq
+1482447862709	geckodriver::marionette	INFO	Starting browser /Users/mhinckley/Applications/Firefox.app/Contents/MacOS/firefox-bin
+1482447942544	geckodriver	INFO	Listening on 127.0.0.1:58304
+1482447943530	mozprofile::profile	INFO	Using profile path /var/folders/0w/jw3z1wgj3k3b00rgddkctrnm0000gp/T/rust_mozprofile.qlN3KD1b02gb
+1482447943531	geckodriver::marionette	INFO	Starting browser /Users/mhinckley/Applications/Firefox.app/Contents/MacOS/firefox-bin
+1482448212015	geckodriver	INFO	Listening on 127.0.0.1:58338
+1482448213002	mozprofile::profile	INFO	Using profile path /var/folders/0w/jw3z1wgj3k3b00rgddkctrnm0000gp/T/rust_mozprofile.NJhEP4sgIGA0
+1482448213003	geckodriver::marionette	INFO	Starting browser /Users/mhinckley/Applications/Firefox.app/Contents/MacOS/firefox-bin
+1482448231848	geckodriver	INFO	Listening on 127.0.0.1:58348
+1482448232853	mozprofile::profile	INFO	Using profile path /var/folders/0w/jw3z1wgj3k3b00rgddkctrnm0000gp/T/rust_mozprofile.BCC1fn3sWNp1
+1482448232855	geckodriver::marionette	INFO	Starting browser /Applications/Firefox.app/Contents/MacOS/firefox-bin
+1482448232860	geckodriver::marionette	INFO	Connecting to Marionette on localhost:58357
+1482448233830	Marionette	INFO	Listening on port 58357
+1482448308047	geckodriver	INFO	Listening on 127.0.0.1:58399
+1482448309052	mozprofile::profile	INFO	Using profile path /var/folders/0w/jw3z1wgj3k3b00rgddkctrnm0000gp/T/rust_mozprofile.MGTfJ40oV0i3
+1482448309053	geckodriver::marionette	INFO	Starting browser /Applications/Firefox.app/Contents/MacOS/firefox-bin
+1482448309057	geckodriver::marionette	INFO	Connecting to Marionette on localhost:58408
+1482448309897	Marionette	INFO	Listening on port 58408
+1482448377599	geckodriver	INFO	Listening on 127.0.0.1:58474
+1482448378600	mozprofile::profile	INFO	Using profile path /var/folders/0w/jw3z1wgj3k3b00rgddkctrnm0000gp/T/rust_mozprofile.NDuXZOkzYZOS
+1482448378600	geckodriver::marionette	INFO	Starting browser /Applications/Firefox.app/Contents/MacOS/firefox-bin
+1482448378603	geckodriver::marionette	INFO	Connecting to Marionette on localhost:58483
+1482448379487	Marionette	INFO	Listening on port 58483
+JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 77: TypeError: this._recipeManager is null
+console.warn: nsLoginManager: searchLogins: `formSubmitURL` or `httpRealm` is recommended
+1482448509445	geckodriver	INFO	Listening on 127.0.0.1:58638
+1482448510445	mozprofile::profile	INFO	Using profile path /var/folders/0w/jw3z1wgj3k3b00rgddkctrnm0000gp/T/rust_mozprofile.48xxTkIHPCs8
+1482448510446	geckodriver::marionette	INFO	Starting browser /Applications/Firefox.app/Contents/MacOS/firefox-bin
+1482448510449	geckodriver::marionette	INFO	Connecting to Marionette on localhost:58647
+1482448510977	Marionette	INFO	Listening on port 58647
+JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 77: TypeError: this._recipeManager is null
+console.warn: nsLoginManager: searchLogins: `formSubmitURL` or `httpRealm` is recommended
