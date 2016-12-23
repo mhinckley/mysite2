@@ -1,6 +1,6 @@
 from django.conf.urls import url
 from . import views
-from jsonview.decorators import json_view
+# from jsonview.decorators import json_view
 
 urlpatterns = [
     url(r'^$', views.post_list, name='post_list'),
