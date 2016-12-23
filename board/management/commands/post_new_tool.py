@@ -21,7 +21,7 @@ login.send_keys(Keys.RETURN)
 username = driver.find_element_by_css_selector("#id_username")
 username.send_keys("mike")
 password = driver.find_element_by_css_selector("#id_password")
-password.send_keys("player13")
+password.send_keys("")
 login_button = driver.find_element_by_css_selector(".btn")
 login_button.send_keys(Keys.RETURN)
 

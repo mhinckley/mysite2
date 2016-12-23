@@ -2,7 +2,7 @@
 
 {% block content %}
 
-		{% for follow in daily_follows %}
+		{% for follow in follows %}
 		                      
         {# <a href="{% url 'post_detail' pk=post.pk %}"> #}
             <span style="color:red;  font-weight: bold;">To </span><br><span style="color: #6ecadc;">{{ follow.post.to_field }}</span><span style="color:white; font-weight: bold;">,</span>

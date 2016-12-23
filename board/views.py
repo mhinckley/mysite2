@@ -8,6 +8,10 @@ from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views.generic.edit import CreateView
 from django.core.urlresolvers import reverse
+from libs import google_sheet_accessor 
+from django.utils.decorators import method_decorator
+from jsonview.decorators import json_view
+from django.contrib.auth.models import User
 
 try:
     from django.utils import simplejson as json
@@ -257,5 +261,30 @@ def follow_button(request):
 def home(request):
     return render(request, 'board/home.html')
 
+'''
+class GoogleDataView(View):
+    @method_decorator(json_view)
+    def dispatch(self, *args, **kwargs):
+        return super(GoogleDataView, self).dispatch(*args, **kwargs)
+    
+    def post(self, request, *args, **kwargs):
+        # Get relevant info from headers
+        resource_id = request.META['X-Goog-Resource-ID']
+        # Call library function to retrieve new data
+        data = google_sheet_accessor.get_post_from_google(resource_id)
+
+        post = Post()
+        # Map google data fields to Post object
+        post.to_field = data['to_field_sheet']
+        post.do_field = data['do_field_sheet']
+        post.person = data['person_sheet']
+        post.summary = data['summary_sheet']
+        post.source_url = data['source_url_sheet']
+        email_address = data['author_sheet']        
+        post.author = User.objects.filter(email=email_address) 
+        post.save()
+        return reverse("post_detail", kwargs = {"pk": self.kwargs["post"]})
+
+'''
 
 

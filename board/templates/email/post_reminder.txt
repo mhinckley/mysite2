@@ -2,7 +2,7 @@
 
 {% block content %}
 		
-		{% for follow in daily_follows %}
+		{% for follow in follows %}
 		
 				{{ follow.post.to_field }}, you should {{ follow.post.do_field }}.\n
 
