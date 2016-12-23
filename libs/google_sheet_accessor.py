@@ -1,3 +1,4 @@
+'''
 from __future__ import print_function
 import httplib2
 import os
@@ -89,3 +90,4 @@ def get_post_from_google():
 
 
 # User.objects.all().last().email
+'''
