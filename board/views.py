@@ -8,9 +8,9 @@ from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views.generic.edit import CreateView
 from django.core.urlresolvers import reverse
-from libs import google_sheet_accessor 
+# from libs import google_sheet_accessor 
 from django.utils.decorators import method_decorator
-from jsonview.decorators import json_view
+# from jsonview.decorators import json_view
 from django.contrib.auth.models import User
 
 try:
