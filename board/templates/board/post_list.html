@@ -155,11 +155,17 @@
             {% for post in posts %}
                 <div class="post-list-parent_1 post{{ post.pk }} col-md-8">
                         <p style="color: gray; font-style: italic;">
-                          <a href="{% url 'person_posts' person_or_proof=post.person %}">{{ post.person }}</a>, 
-                          {% for proof in post.proof_set.all %}
-                              <a href="{% url 'person_posts' person_or_proof=proof.person %}">{{ proof.person }}</a>,
-                          {% endfor %}
-                          and others use this...
+                          {% if post.person %}
+                              <a href="{% url 'person_posts' person_or_proof=post.person %}">{{ post.person }}</a>{% if post.proof_set.all %},{% endif %}
+                          {% endif %}
+                          {% if post.proof_set.all %} 
+                              {% for proof in post.proof_set.all %}
+                                  <a href="{% url 'person_posts' person_or_proof=proof.person %}">{{ proof.person }}</a>{% if post.proof_set.count > 1  %},{% endif %}
+                              {% endfor %}
+                          {% endif %}
+                          {% if post.person or post.proof_set.all %}
+                              and others use this...
+                          {% endif %}
                         </p>
                 
 
