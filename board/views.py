@@ -78,6 +78,12 @@ def user_posts(request, author):
     posts = Post.objects.filter(author__username=author).order_by('-published_date')
     return render(request, 'board/post_list.html', {'posts': posts})
 
+def person_posts(request, person_or_proof):
+    person_from_posts = Post.objects.filter(person__iexact=person_or_proof)
+    person_from_proofs = Post.objects.filter(proof__person__iexact=person_or_proof)
+    posts = person_from_posts | person_from_proofs 
+    return render(request, 'board/post_list.html', {'posts': posts})
+
 def to_posts(request, to_field):
     posts = Post.objects.filter(to_field=to_field).order_by('-published_date')
     return render(request, 'board/post_list.html', {'posts': posts})

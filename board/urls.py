@@ -9,6 +9,7 @@ urlpatterns = [
     url(r'^posts/class/(?P<clazz>[a-zA-Z "-]+)/$', views.clazz_posts, name='clazz_posts'),
     #url(r'^post/when/(?P<when>[a-zA-Z ]+)/$', views.remember_posts, name='remember_posts'),
     url(r'^posts/user/(?P<author>[a-zA-Z0-9_-]+)/$', views.user_posts, name='user_posts'),
+    url(r'^posts/(?P<person_or_proof>[a-zA-Z0-9_ ()-]+)/$', views.person_posts, name='person_posts'),
     url(r'^posts/to_field/(?P<to_field>[a-zA-Z0-9 "-]+)/$', views.to_posts, name='to_posts'),
     url(r'^register/$', views.register, name='register'), # ADD NEW PATTERN!
     url(r'^post/(?P<post>\d+)/comment/$', views.CommentCreate.as_view(), name='comment_new'),

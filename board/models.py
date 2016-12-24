@@ -94,7 +94,6 @@ class Post(models.Model):
         """
         return self.comment_set.count()
 
-
 class Proof(models.Model):
     author = models.ForeignKey('auth.User')
     person = models.CharField(max_length=100)

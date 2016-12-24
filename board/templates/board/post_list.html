@@ -153,6 +153,12 @@
         <div class="col-md-8">
             {% for post in posts %}
                 <div class="post-list-parent_1 post{{ post.pk }} col-md-8">
+                    {% if post.person %}
+                        <p style="color: gray; font-style: italic;">
+                        
+                          <a href="{% url 'person_posts' person_or_proof=post.person %}">{{ post.person }}</a> and others use this...
+                        </p>
+                    {% endif %}
                     <div class="post-list-vote col-md-2">
                               
                           {% if user.is_authenticated %}
@@ -174,6 +180,7 @@
                         {% endif %}
 
                     </div>
+
                     <a href="{% url 'post_detail' pk=post.pk %}">
                         <button class="post-list-to_should_section col-md-6 img-rounded">
                             <span style="color:white;  font-weight: bold;">To </span><br><span style="color: #6ecadc;">{{ post.to_field }}</span><span style="color:white; font-weight: bold;">,</span>
