@@ -33,46 +33,65 @@
 				text-align: center;
 				margin-top: -250px;
 				position: relative;
-				padding-bottom: 200px;">
+				padding-bottom: 170px;">
 
 				<!--<p>To <span id="tagline-one">get better</span>, <span id="tagline-two">search here</span>.</p>-->
-				    <p>Share your secrets to performance,<br> and learn from others</p>
+				    <p>Share your tools of influence,<br> and learn from others</p>
 				</div>
+
+<div style="
+		  				font-size: 30px;
+		  				color: black;
+		  				font-weight: bolder;
+		  				text-align: center;
+		  				padding-bottom: 15px;
+		  			">
+							<p>-- Featured Collections --</p>
+				</div>
+
+    <div class="row">
+
+                <div class="img-pic-container col-md-2">
+                </div>
+                <div class="img-pic-container col-md-2">
+  	                <a href="/posts/Robert Moses">
+		                    <img src="{% static 'images/robert.jpg' %}" class="img-rounded img-responsive images" width="150" >
+
+                    		<h3 class="img-text-container"><span class="background-color-one">Robert Moses</span></h3>
+             				</a>
+                </div>
+
+                <div class="img-pic-container col-md-2">
+                		<a href="/posts/LBJ">
+                    		<img src="{% static 'images/lbj.jpg' %}" class="img-rounded img-responsive images" width="150">
+                    		<h3 class="img-text-container"><span class="background-color-two">LBJ</span></h3>
+                		</a>
+                </div>
+                <div class="img-pic-container col-md-2">
+                  	<a href="/posts/Heidi Roizen">
+                    		<img src="{% static 'images/heidi.jpg' %}" class="img-rounded img-responsive images" width="150">
+                    		<h3 class="img-text-container"><span class="background-color-one">Heidi Roizen</span></h3>
+                		</a>
+                </div>
+                <div class="img-pic-container col-md-2">
+                  	<a href="/posts/Alexander Hamilton">
+                    		<img src="{% static 'images/alex.jpg' %}" class="img-rounded img-responsive images" width="150">
+                    		<h3 class="img-text-container"><span class="background-color-two">Alexander Hamilton</span></h3>
+                		</a>
+                </div>
+                <div class="img-pic-container col-md-2">
+                </div> 
+      </div>
+
 				<div style="
 		  				font-size: 30px;
 		  				color: black;
 		  				font-weight: bolder;
 		  				text-align: center;
+		  				margin-top: 70px;
 		  			">
-							<p>-- Latest Tools Shared --</p>
+							<p>-- Your Tool Feed --</p>
 				</div>
-		<!--
-				</div>
-						<div class="row collection-panel">
-		            <div class="panel-title"><h3>Popular Topics</h3></div>
-		            <div class="panel-pic-container">
-		                  <div class="col-md-3">
-		                      <img src="{% static 'images/bulb.jpg' %}" class="img-rounded img-responsive images">
-		                      <h3 class="img-text-container"><span class="background-color-two">Might</span></h3>
-		                  </div>
-		                  <div class="col-md-3">
-		                      <img src="{% static 'images/power.jpg' %}" class="img-rounded img-responsive images">
-		                      <h3 class="img-text-container"><span class="background-color-one">Allocentrism</span></h3>
-		                  </div>
-		                  <div class="col-md-3">
-		                      <img src="{% static 'images/focus.jpg' %}" class="img-rounded img-responsive images">
-		                      <h3 class="img-text-container"><span class="background-color-two">Coalitions</span></h3>
-		                  </div>
-		                  <div class="col-md-3">
-		                      <img src="{% static 'images/speak.jpg' %}" class="img-rounded img-responsive images">
-		                      <h3 class="img-text-container"><span class="background-color-one">Being multiple</span></h3>
-		                  </div>
-		            </div> 
-		        </div>
-		-->
-
-
-
 				
 		{% elif request.path = "/posts/mytoolkit/" %}
 				<div style="

@@ -53,10 +53,24 @@ body {
   float: left;
 }
 
+
+.images {
+  -webkit-filter: grayscale(100%);
+  filter: grayscale(100%);
+}
+
+
+.img-pic-container {
+
+}
+
+
+
+
+
 .post-list-vote {
     text-align: center;
 }
-
 
 
 .post-list-to_should_section {
@@ -140,12 +154,6 @@ body {
   display: block;
   margin: 0 auto;
 }
-.panel-pic-container {
-  height: 10px;
-  padding-top: 20px;
-  padding-left: 5%;
-  padding-right: 5%;
-}
 
 
 .img-text-container {
@@ -155,8 +163,8 @@ body {
     font-size:20px; 
     color: white;
     font-weight: bold;
-    text-align: center;
-
+    text-align: left;
+    padding-left: 10px;
 }
 
 .background-color-one {
