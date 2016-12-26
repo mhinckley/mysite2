@@ -54,11 +54,14 @@
 
             <div>
                 <h3>
-                  <span class="detail-second-head">Created by </span><a href="{% url 'user_posts' author=post.author %}"><span class="detail-second-head">{{post.author}}</a>
+                  <span class="detail-second-head">By <a href="{% url 'user_posts' author=post.author %}">{{post.author}}</a>  //  {{ post.published_date|date:"F n, Y" }}
+                  </span>
                </h3>
                 <div class="detail-second-summary">
                   {% if post.person %}
-                      <span style="font-weight: bolder">{{ post.person }} - </span>
+                      <span style="font-weight: bolder">
+                          <a href="{% url 'person_posts' person_or_proof=post.person %}">{{ post.person }}</a> - 
+                      </span>
                   {% endif %}
 
                   {% if post.summary %}
@@ -66,7 +69,7 @@
                   {% endif %}
 
                   {% if post.source_url %}
-                      [<a href="{{ post.source_url }}">link</a>]
+                      [<a href="{{ post.source_url }}">source link</a>]
                   {% endif %}
                 </div>
             </div>
@@ -80,12 +83,15 @@
                 <div class="detail-second-example">
                     <ul>
                         {% for proof in post.proof_set.all %}
-                              {% if proof.source_url %}
-                                  <li><span style="font-weight: bolder">{{ proof.person }} - </span> {{ proof.caption }} [<a href="{{ proof.source_url }}">link</a>]</li>
-                              {% else %}
-                                  <li><span style="font-weight: bolder">{{ proof.person }} - </span> {{ proof.caption }}</li>              
-                              {% endif %}
-
+                            <li>
+                                <span style="font-weight: bolder">
+                                    <a href="{% url 'person_posts' person_or_proof=proof.person %}">{{ proof.person }}</a> - 
+                                </span>
+                                {{ proof.caption }} 
+                            {% if proof.source_url %}
+                                [<a href="{{ proof.source_url }}">source link</a>] 
+                            {% endif %}
+                            </li>
                         {% endfor %}
                     </ul>
                 </div>

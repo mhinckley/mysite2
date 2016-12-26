@@ -1,157 +1,126 @@
-{% extends 'board/post_list_heading.html' %}
-
-
-
+{% extends 'board/base.html' %}
+{% load staticfiles %}
 {% block content %}
 
-  <!-- IF MY TOOLKIT -->
-  {% if request.path = "/posts/mytoolkit/" %}
 
-      <div class="col-md-2"></div>
-        <div class="col-md-8">
-            
-          <div>
-            <div class="col-md-12" style="margin-top: 30px; margin-bottom: -20px;"><h1>Daily Reminders</h1></div>
-            {% for post in daily_posts %}
-                <div class="post-list-parent_1 post{{ post.pk }}">
-                    <div class="post-list-vote col-md-2">
-                        {% if post in liked_posts %}
-                            <button type="button" class="btn btn-default-sm post-list-like-button" name="{{ post.id }}" style="background-color: #3eb991; color: white;" />
-                                <span class="glyphicon glyphicon-saved like_count post-list-like-text" aria-hidden="true" style="font-size: 25px;"></span><span></span>
-                            </button>
-                        {% else %}
-                            <button type="button" class="btn btn-default-sm post-list-like-button" name="{{ post.id }}" style="background-color: #e01563; color: white;" />
-                                <span class="glyphicon glyphicon-save like_count post-list-like-text" aria-hidden="true" style="font-size: 16px"></span><span> Save</span>
-                            </button>
-                        {% endif %}
-                    </div>
-                    <a href="{% url 'post_detail' pk=post.pk %}">
-                        <button class="post-list-to_should_section col-md-6 img-rounded">
-                            <span style="color:white;  font-weight: bold;">To </span><br><span style="color: #6ecadc;">{{ post.to_field }}</span><span style="color:white; font-weight: bold;">,</span>
-                            <br><br>
-                            <span style="color:white; font-weight: bold;">You should <br></span><span style="color: #e9a820;">{{ post.do_field }}</span><span style="color:white; font-weight: bold;">.</span>
-                        </button>
-                    </a>
-                </div>
-            {% endfor %}
-          </div>
-          
-          <div>
-            <div class="col-md-12" style="margin-top: 30px; margin-bottom: -20px;"><h1>Weekly Reminders</h1></div>
-            {% for post in weekly_posts %}
-                <div class="post-list-parent_1 post{{ post.pk }}">
-                    <div class="post-list-vote col-md-2">
-                        {% if post in liked_posts %}
-                            <button type="button" class="btn btn-default-sm post-list-like-button" name="{{ post.id }}" style="background-color: #3eb991; color: white;" />
-                                <span class="glyphicon glyphicon-saved like_count post-list-like-text" aria-hidden="true" style="font-size: 25px;"></span><span></span>
-                            </button>
-                        {% else %}
-                            <button type="button" class="btn btn-default-sm post-list-like-button" name="{{ post.id }}" style="background-color: #e01563; color: white;" />
-                                <span class="glyphicon glyphicon-save like_count post-list-like-text" aria-hidden="true" style="font-size: 16px"></span><span> Save</span>
-                            </button>
-                        {% endif %}
-                    </div>
-                    <a href="{% url 'post_detail' pk=post.pk %}">
-                        <button class="post-list-to_should_section col-md-6 img-rounded">
-                            <span style="color:white;  font-weight: bold;">To </span><br><span style="color: #6ecadc;">{{ post.to_field }}</span><span style="color:white; font-weight: bold;">,</span>
-                            <br><br>
-                            <span style="color:white; font-weight: bold;">You should <br></span><span style="color: #e9a820;">{{ post.do_field }}</span><span style="color:white; font-weight: bold;">.</span>
-                        </button>
-                    </a>
-                </div>
-            {% endfor %}
-          </div>
+    
+    {% if request.path = "/" %}
 
-          <div>
-            <div class="col-md-12" style="margin-top: 30px; margin-bottom: -20px;"><h1>Monthly Reminders</h1></div>
-            {% for post in monthly_posts %}
-                <div class="post-list-parent_1 post{{ post.pk }}">
-                    <div class="post-list-vote col-md-2">
-                        {% if post in liked_posts %}
-                            <button type="button" class="btn btn-default-sm post-list-like-button" name="{{ post.id }}" style="background-color: #3eb991; color: white;" />
-                                <span class="glyphicon glyphicon-saved like_count post-list-like-text" aria-hidden="true" style="font-size: 25px;"></span><span></span>
-                            </button>
-                        {% else %}
-                            <button type="button" class="btn btn-default-sm post-list-like-button" name="{{ post.id }}" style="background-color: #e01563; color: white;" />
-                                <span class="glyphicon glyphicon-save like_count post-list-like-text" aria-hidden="true" style="font-size: 16px"></span><span> Save</span>
-                            </button>
-                        {% endif %}
-                    </div>
-                    <a href="{% url 'post_detail' pk=post.pk %}">
-                        <button class="post-list-to_should_section col-md-6 img-rounded">
-                            <span style="color:white;  font-weight: bold;">To </span><br><span style="color: #6ecadc;">{{ post.to_field }}</span><span style="color:white; font-weight: bold;">,</span>
-                            <br><br>
-                            <span style="color:white; font-weight: bold;">You should <br></span><span style="color: #e9a820;">{{ post.do_field }}</span><span style="color:white; font-weight: bold;">.</span>
-                        </button>
-                    </a>
-                </div>
-            {% endfor %}
-          </div>
-
-          <div>
-            <div class="col-md-12" style="margin-top: 30px; margin-bottom: -20px;"><h1>Saved for Later (But No Reminders)</h1></div>            
-            {% for post in saved_for_later_posts %}
-                <div class="post-list-parent_1 post{{ post.pk }}">
-                    <div class="post-list-vote col-md-2">
-                        {% if post in liked_posts %}
-                            <button type="button" class="btn btn-default-sm post-list-like-button" name="{{ post.id }}" style="background-color: #3eb991; color: white;" />
-                                <span class="glyphicon glyphicon-saved like_count post-list-like-text" aria-hidden="true" style="font-size: 25px;"></span><span></span>
-                            </button>
-                        {% else %}
-                            <button type="button" class="btn btn-default-sm post-list-like-button" name="{{ post.id }}" style="background-color: #e01563; color: white;" />
-                                <span class="glyphicon glyphicon-save like_count post-list-like-text" aria-hidden="true" style="font-size: 16px"></span><span> Save</span>
-                            </button>
-                        {% endif %}
-                    </div>
-                    <a href="{% url 'post_detail' pk=post.pk %}">
-                        <button class="post-list-to_should_section col-md-6 img-rounded">
-                            <span style="color:white;  font-weight: bold;">To </span><br><span style="color: #6ecadc;">{{ post.to_field }}</span><span style="color:white; font-weight: bold;">,</span>
-                            <br><br>
-                            <span style="color:white; font-weight: bold;">You should <br></span><span style="color: #e9a820;">{{ post.do_field }}</span><span style="color:white; font-weight: bold;">.</span>
-                        </button>
-                    </a>
-                </div>
-            {% endfor %}
-          </div>
-
-          <div>
-            <div class="col-md-12" style="margin-top: 30px; margin-bottom: -20px;"><h1>Other Tools You Created</h1></div>            
-            {% for post in my_remainder_posts %}
-                <div class="post-list-parent_1 post{{ post.pk }}">
-                    <div class="post-list-vote col-md-2">
-                        {% if post in liked_posts %}
-                            <button type="button" class="btn btn-default-sm post-list-like-button" name="{{ post.id }}" style="background-color: #3eb991; color: white;" />
-                                <span class="glyphicon glyphicon-saved like_count post-list-like-text" aria-hidden="true" style="font-size: 25px;"></span><span></span>
-                            </button>
-                        {% else %}
-                            <button type="button" class="btn btn-default-sm post-list-like-button" name="{{ post.id }}" style="background-color: #e01563; color: white;" />
-                                <span class="glyphicon glyphicon-save like_count post-list-like-text" aria-hidden="true" style="font-size: 16px"></span><span> Save</span>
-                            </button>
-                        {% endif %}
-                    </div>
-                    <a href="{% url 'post_detail' pk=post.pk %}">
-                        <button class="post-list-to_should_section col-md-6 img-rounded">
-                            <span style="color:white;  font-weight: bold;">To </span><br><span style="color: #6ecadc;">{{ post.to_field }}</span><span style="color:white; font-weight: bold;">,</span>
-                            <br><br>
-                            <span style="color:white; font-weight: bold;">You should <br></span><span style="color: #e9a820;">{{ post.do_field }}</span><span style="color:white; font-weight: bold;">.</span>
-                        </button>
-                    </a>
-                </div>
-            {% endfor %}
-          </div>
-
+        <div style="
+            max-height: 400px;
+            margin-top: -50px;
+            overflow: hidden;
+            padding-bottom: 300px;
+        ">
+            <img src="{% static 'images/steam_engine.jpg' %}" style="    
+            min-width: 100%;
+            min-height: 100%;
+            margin-top: -20%;
+            z-index: -1;
+            ">
 
         </div>
-        <div class="col-md-2"></div>
+        <div style="
+        width: 100%;
+        top: 40%;
+        z-index:1;
+        color: white;
+        font-size: 40px;
+        font-weight: bold;
+        color: white;
+        text-align: center;
+        margin-top: -250px;
+        position: relative;
+        padding-bottom: 170px;">
+
+        <!--<p>To <span id="tagline-one">get better</span>, <span id="tagline-two">search here</span>.</p>-->
+            <p>Share your tools of influence,<br> and learn from others</p>
+        </div>
+
+<div style="
+              font-size: 30px;
+              color: black;
+              font-weight: bolder;
+              text-align: center;
+              padding-bottom: 15px;
+            ">
+              <p>-- Featured Collections --</p>
+        </div>
+
+    <div class="row">
+
+                <div class="img-pic-container col-md-2">
+                </div>
+                <div class="img-pic-container col-md-2">
+                    <a href="/posts/Robert Moses">
+                        <img src="{% static 'images/robert.jpg' %}" class="img-rounded img-responsive images" width="150" >
+
+                        <h3 class="img-text-container"><span class="background-color-one">Robert Moses</span></h3>
+                    </a>
+                </div>
+
+                <div class="img-pic-container col-md-2">
+                    <a href="/posts/LBJ">
+                        <img src="{% static 'images/lbj.jpg' %}" class="img-rounded img-responsive images" width="150">
+                        <h3 class="img-text-container"><span class="background-color-two">LBJ</span></h3>
+                    </a>
+                </div>
+                <div class="img-pic-container col-md-2">
+                    <a href="/posts/Heidi Roizen">
+                        <img src="{% static 'images/heidi.jpg' %}" class="img-rounded img-responsive images" width="150">
+                        <h3 class="img-text-container"><span class="background-color-one">Heidi Roizen</span></h3>
+                    </a>
+                </div>
+                <div class="img-pic-container col-md-2">
+                    <a href="/posts/Alexander Hamilton">
+                        <img src="{% static 'images/alex.jpg' %}" class="img-rounded img-responsive images" width="150">
+                        <h3 class="img-text-container"><span class="background-color-two">Alexander Hamilton</span></h3>
+                    </a>
+                </div>
+                <div class="img-pic-container col-md-2">
+                </div> 
+      </div>
+
+        <div style="
+              font-size: 30px;
+              color: black;
+              font-weight: bolder;
+              text-align: center;
+              margin-top: 70px;
+            ">
+              <p>-- Your Tool Feed --</p>
+        </div>
+  
+    {% else %}
+        <div style="
+              font-size: 30px;
+              color: black;
+              font-weight: bolder;
+              text-align: center;
+            ">
+              <p>-- Search results --</p>
+        </div>
+        <div style="
+              font-size: 20px;
+              color: black;
+              text-align: center;
+              margin-bottom: 30px;
+            ">
+              <p><a href="{% url 'board.views.post_list' %}">Back to home</a></p>
+        </div>
+         
+
+    {% endif %} 
 
 
 
-  <!-- IF NOT MY TOOLKIT-->
-  {% else %}
+
+
+
 
         <div class="col-md-2"></div>
         <div class="col-md-8">
-        
+
 
             {% for post in posts %}
                 <div class="post-list-parent_1 post{{ post.pk }} col-md-8">
@@ -238,8 +207,6 @@
         </div>
         <div class="col-md-2"></div>
 
-  <!--END OF IF STATEMENT FOR MYTOOLKIT-->
-  {% endif %}
 
 
   {% if user.is_authenticated %}

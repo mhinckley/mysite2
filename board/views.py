@@ -90,7 +90,6 @@ def to_posts(request, to_field):
 
 def my_toolkit(request):
     user = request.user
-    posts = Post.objects.filter(likes=request.user.pk).order_by('-published_date')
     liked_posts = Post.objects.filter(likes=request.user.pk)
     my_posts = Post.objects.filter(author=request.user.pk).order_by('-published_date')
 
@@ -126,10 +125,9 @@ def my_toolkit(request):
         # If page is out of range (e.g. 9999), deliver last page of results.
         posts = paginator.page(paginator.num_pages)
 
-    return render(request, 'board/post_list.html', {'posts': posts, 'liked_posts': liked_posts,
+    return render(request, 'board/mytoolkit.html', {'liked_posts': liked_posts,
         'daily_posts': daily_posts, 'weekly_posts': weekly_posts, 'monthly_posts': monthly_posts,
         'saved_for_later_posts': saved_for_later_posts, 'my_remainder_posts': my_remainder_posts})
-
 
 
 #Parameters in the def are recieved from the url
@@ -266,6 +264,7 @@ def follow_button(request):
 
 def home(request):
     return render(request, 'board/home.html')
+
 
 '''
 class GoogleDataView(View):
