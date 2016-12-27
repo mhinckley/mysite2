@@ -6,11 +6,11 @@ from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.views.generic.edit import CreateView
+from django.views.generic import View, CreateView
 from django.core.urlresolvers import reverse
-# from libs import google_sheet_accessor 
+from libs import google_sheet_accessor 
 from django.utils.decorators import method_decorator
-# from jsonview.decorators import json_view
+from jsonview.decorators import json_view
 from django.contrib.auth.models import User
 
 try:
@@ -258,7 +258,6 @@ def home(request):
     return render(request, 'board/home.html')
 
 
-'''
 class GoogleDataView(View):
     @method_decorator(json_view)
     def dispatch(self, *args, **kwargs):
@@ -282,6 +281,5 @@ class GoogleDataView(View):
         post.save()
         return reverse("post_detail", kwargs = {"pk": self.kwargs["post"]})
 
-'''
 
 

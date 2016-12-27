@@ -1,4 +1,4 @@
-'''
+
 from __future__ import print_function
 import httplib2
 import os
@@ -85,9 +85,9 @@ def get_post_from_google():
                 , 'source_url_sheet' : post_value[0][4]
                 , 'author_sheet' : post_value[0][5]
                 }
-            return print(accessor_output)
+            return accessor_output
 
 
-
-# User.objects.all().last().email
-'''
+# User.objects.all().last().email 
+if __name__ == "__main__":
+    get_post_from_google()

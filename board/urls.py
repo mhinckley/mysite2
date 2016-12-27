@@ -1,7 +1,6 @@
 from django.conf.urls import url
 from . import views
 
-
 urlpatterns = [
     url(r'^$', views.post_list, name='post_list'),
     url(r'^post/(?P<pk>\d+)/$', views.post_detail, name='post_detail'),
@@ -18,11 +17,12 @@ urlpatterns = [
     url(r'^like/$', views.like_button, name='like_button'),
     url(r'^follow/$', views.follow_button, name='follow_button'),
     url(r'^home/$', views.home, name='home'),
+    url(r'^notification/$', views.GoogleDataView.as_view(), name='google_data_view'),
 ]
 
 
-# from jsonview.decorators import json_view
-# url(r'^notification/$', json_view(GoogleDataView.as_view())),
+
+
 
 # url(r'^post/genre/(?P<content_type>[a-zA-Z ]+)/$', views.genre_posts, name='genre_posts'),
 # content_type above links to the parameter in the view function
