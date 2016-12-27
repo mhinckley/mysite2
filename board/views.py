@@ -78,12 +78,6 @@ def user_posts(request, author):
     posts = Post.objects.filter(author__username=author).order_by('-published_date')
     return render(request, 'board/post_list.html', {'posts': posts})
 
-def person_posts(request, person_or_proof):
-    person_from_posts = Post.objects.filter(person__iexact=person_or_proof)
-    person_from_proofs = Post.objects.filter(proof__person__iexact=person_or_proof)
-    posts = person_from_posts | person_from_proofs 
-    return render(request, 'board/post_list.html', {'posts': posts})
-
 def to_posts(request, to_field):
     posts = Post.objects.filter(to_field=to_field).order_by('-published_date')
     return render(request, 'board/post_list.html', {'posts': posts})
@@ -91,6 +85,7 @@ def to_posts(request, to_field):
 def my_toolkit(request):
     user = request.user
     liked_posts = Post.objects.filter(likes=request.user.pk)
+    print liked_posts
     my_posts = Post.objects.filter(author=request.user.pk).order_by('-published_date')
 
     daily_follows = user.follow_set.filter(frequency=1)
@@ -113,26 +108,23 @@ def my_toolkit(request):
     # Get all remaining posts that user has created
     my_remainder_posts = my_posts.exclude(id__in=saved_for_later_post_ids).exclude(id__in=all_follow_posts_ids)
 
-
-    paginator = Paginator(posts, 10)
-    page = request.GET.get('page')
-    try:
-        posts = paginator.page(page)
-    except PageNotAnInteger:
-        # If page is not an integer, deliver first page.
-        posts = paginator.page(1)
-    except EmptyPage:
-        # If page is out of range (e.g. 9999), deliver last page of results.
-        posts = paginator.page(paginator.num_pages)
-
     return render(request, 'board/mytoolkit.html', {'liked_posts': liked_posts,
         'daily_posts': daily_posts, 'weekly_posts': weekly_posts, 'monthly_posts': monthly_posts,
         'saved_for_later_posts': saved_for_later_posts, 'my_remainder_posts': my_remainder_posts})
+
+#    to debug you can put "print liked_posts" into a view or "print anything"
 
 
 #Parameters in the def are recieved from the url
 #Second argument in return defines which template
 #Third argument in return function defines what object will be available in the templates
+
+
+def person_posts(request, person_or_proof):
+    person_from_posts = Post.objects.filter(person__iexact=person_or_proof)
+    person_from_proofs = Post.objects.filter(proof__person__iexact=person_or_proof)
+    posts = person_from_posts | person_from_proofs 
+    return render(request, 'board/post_list.html', {'posts': posts})
 
 
 def register(request):
