@@ -266,6 +266,7 @@ class GoogleDataView(View):
     def post(self, request, *args, **kwargs):
         # Get relevant info from headers
         resource_id = request.META['X-Goog-Resource-ID']
+        print(resource_id)
         # Call library function to retrieve new data
         data = google_sheet_accessor.get_post_from_google(resource_id)
 
@@ -277,7 +278,7 @@ class GoogleDataView(View):
         post.summary = data['summary_sheet']
         post.source_url = data['source_url_sheet']
         email_address = data['author_sheet']        
-        post.author = User.objects.filter(email=email_address) 
+        post.author = User.objects.filter(email=email_address).first()
         post.save()
         return reverse("post_detail", kwargs = {"pk": self.kwargs["post"]})
 

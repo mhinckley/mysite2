@@ -17,6 +17,8 @@ urlpatterns = [
     url(r'^like/$', views.like_button, name='like_button'),
     url(r'^follow/$', views.follow_button, name='follow_button'),
     url(r'^home/$', views.home, name='home'),
+
+    # JSON REST API 
     url(r'^notification/$', views.GoogleDataView.as_view(), name='google_data_view'),
 ]
 

@@ -9,8 +9,6 @@ from oauth2client import tools
 from oauth2client.file import Storage
 
 
-
-
 # If modifying these scopes, delete your previously saved credentials
 # at ~/.credentials/sheets.googleapis.com-python-quickstart.json
 SCOPES = 'https://www.googleapis.com/auth/spreadsheets.readonly'
@@ -46,7 +44,8 @@ def get_credentials():
         print('Storing credentials to ' + credential_path)
     return credentials
 
-def get_post_from_google():
+
+def get_post_from_google(spreadsheetId):
     """Shows basic usage of the Sheets API.
 
     Creates a Sheets API service object and prints the names and majors of
@@ -54,13 +53,13 @@ def get_post_from_google():
     https://docs.google.com/spreadsheets/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms/edit
     """
     credentials = get_credentials()
+    print(credentials.get_access_token())
     http = credentials.authorize(httplib2.Http())
     discoveryUrl = ('https://sheets.googleapis.com/$discovery/rest?'
                     'version=v4')
     service = discovery.build('sheets', 'v4', http=http,
                               discoveryServiceUrl=discoveryUrl)
 
-    spreadsheetId = '1tVFfZdv2OdfA5MKwNGqtM8gjzzbzpFGiZYnzbQ-tcKo'
     index_rangeName = 'Final Data!I1:I1'
 
     index_result = service.spreadsheets().values().get(
@@ -90,4 +89,20 @@ def get_post_from_google():
 
 # User.objects.all().last().email 
 if __name__ == "__main__":
-    get_post_from_google()
+    spreadsheetId = '1tVFfZdv2OdfA5MKwNGqtM8gjzzbzpFGiZYnzbQ-tcKo'
+    get_post_from_google(spreadsheetId)
+
+
+"""
+https://www.googleapis.com/drive/v3/files/1tVFfZdv2OdfA5MKwNGqtM8gjzzbzpFGiZYnzbQ-tcKo/watch
+https://www.googleapis.com/drive/v3/changes/watch
+u'ya29.CjDBAxLLuevljX0nz-0Z-D1S_2CgDMCj4CsOEhzY9q3Y0DG5Y10oLuRBV41COsMmB1s'
+
+curl -v -k -X POST -H "Content-Type: application/json" -H 'Authorization: Bearer ya29.CjDBAxLLuevljX0nz-0Z-D1S_2CgDMCj4CsOEhzY9q3Y0DG5Y10oLuRBV41COsMmB1s' "https://www.googleapis.com/drive/v3/changes/watch"
+
+To set up a notification channel for messages about changes to a particular resource,
+ send a POST request to the watch method for the resource.
+
+ <p><b>411.</b> <ins>That's an error.</ins>
+  <p>POST requests require a <code>Content-length</code> header.  <ins>That's all we know.</ins>
+"""
