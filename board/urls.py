@@ -19,7 +19,7 @@ urlpatterns = [
     url(r'^home/$', views.home, name='home'),
 
     # JSON REST API 
-    url(r'^notification/$', views.GoogleDataView.as_view(), name='google_data_view'),
+    #url(r'^notification/$', views.GoogleDataView.as_view(), name='google_data_view'),
 ]
 
 

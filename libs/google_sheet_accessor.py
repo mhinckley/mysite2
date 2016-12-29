@@ -60,49 +60,58 @@ def get_post_from_google(spreadsheetId):
     service = discovery.build('sheets', 'v4', http=http,
                               discoveryServiceUrl=discoveryUrl)
 
-    index_rangeName = 'Final Data!I1:I1'
+    index_rangeName = 'Final Data!J1:J1'
 
     index_result = service.spreadsheets().values().get(
         spreadsheetId=spreadsheetId, range=index_rangeName).execute()
     index_value = index_result.get('values')[0][0]
 
+    ascending_accessor_output = []
+    descending_accessor_output = []
+
     if not index_value:
         print('No index value found.')
     else:
-        post_rangeName = 'Final Data!B' + index_value +':G' + index_value
-        post_result = service.spreadsheets().values().get(
-            spreadsheetId=spreadsheetId, range=post_rangeName).execute()
-        post_value = post_result.get('values')
-        if not post_value:
-            print('No post value found.')
-        else:
-            accessor_output = {
-                'to_field_sheet' : post_value[0][0]
-                , 'do_field_sheet' : post_value[0][1]
-                , 'person_sheet' : post_value[0][2]
-                , 'summary_sheet' : post_value[0][3]
-                , 'source_url_sheet' : post_value[0][4]
-                , 'author_sheet' : post_value[0][5]
-                }
-            return accessor_output
+        for row_value in range(2, int(index_value)+1):  #start at second row because there are column headers in row 1
+            row_value = str(row_value)
+            post_rangeName = 'Final Data!B' + row_value +':H' + row_value
+            post_result = service.spreadsheets().values().get(
+                spreadsheetId=spreadsheetId, range=post_rangeName).execute()
+            post_value = post_result.get('values')
+            if not post_value:
+                print('No post value found in', row_value)
+            else:
+                row_output = {
+                    'to_field_sheet' : post_value[0][0]
+                    , 'do_field_sheet' : post_value[0][1]
+                    , 'person_sheet' : post_value[0][2]
+                    , 'summary_sheet' : post_value[0][3]
+                    , 'source_url_sheet' : post_value[0][4]
+                    , 'author_sheet' : post_value[0][5]
+                    , 'google_id_sheet' : post_value[0][6]
+                    }
+                ascending_accessor_output.append(row_output)
+        descending_accessor_output = ascending_accessor_output[::-1]       
+        return descending_accessor_output
 
-
-# User.objects.all().last().email 
 if __name__ == "__main__":
     spreadsheetId = '1tVFfZdv2OdfA5MKwNGqtM8gjzzbzpFGiZYnzbQ-tcKo'
     get_post_from_google(spreadsheetId)
 
 
+
 """
+# Setting up a push notification instead of pull notification above. Reading API.
+
 https://www.googleapis.com/drive/v3/files/1tVFfZdv2OdfA5MKwNGqtM8gjzzbzpFGiZYnzbQ-tcKo/watch
 https://www.googleapis.com/drive/v3/changes/watch
 u'ya29.CjDBAxLLuevljX0nz-0Z-D1S_2CgDMCj4CsOEhzY9q3Y0DG5Y10oLuRBV41COsMmB1s'
 
+# Curl hits urls in the terminal
+ 
 curl -v -k -X POST -H "Content-Type: application/json" -H 'Authorization: Bearer ya29.CjDBAxLLuevljX0nz-0Z-D1S_2CgDMCj4CsOEhzY9q3Y0DG5Y10oLuRBV41COsMmB1s' "https://www.googleapis.com/drive/v3/changes/watch"
 
-To set up a notification channel for messages about changes to a particular resource,
- send a POST request to the watch method for the resource.
+# Setting up a notification channel for messages about changes to a particular resource. 
+# Send a POST request to the watch method for the resource.
 
- <p><b>411.</b> <ins>That's an error.</ins>
-  <p>POST requests require a <code>Content-length</code> header.  <ins>That's all we know.</ins>
 """

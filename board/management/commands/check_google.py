@@ -20,20 +20,26 @@ class Command(BaseCommand):
         # you have already stored (if you keep them in order from newest to oldest,
         # this will work)
         data = google_sheet_accessor.get_post_from_google(spreadsheetId)
-        print(data)
-        # Right now data is a dictionary but it will need to be a list of dictionaries
-        # Need to look up each entry to see if it's already in the DB, and if not, add it
-        # board_models.Post.objects.filter(google_id=data['google_id'])
 
-        post = board_models.Post()
-        # Map google data fields to Post object
-        post.to_field = data['to_field_sheet']
-        post.do_field = data['do_field_sheet']
-        post.person = data['person_sheet']
-        post.summary = data['summary_sheet']
-        post.source_url = data['source_url_sheet']
-        email_address = data['author_sheet']
-        # TODO What happens if there is no user with that email?
-        post.author = User.objects.filter(email=email_address).first()
-        post.save()
+        for row_data in range(0, len(data)):
+            google_id = data[row_data]['google_id_sheet']
+            current_post_len = len(board_models.Post.objects.filter(google_id=google_id))
+            if current_post_len == 1:
+                # post already exists in the model
+                break
+            else:
+                # will be called if post isn't already in the model 
+                post = board_models.Post()
+                # Map google data fields to Post object
+                post.to_field = data[row_data]['to_field_sheet']
+                post.do_field = data[row_data]['do_field_sheet']
+                post.person = data[row_data]['person_sheet']
+                post.summary = data[row_data]['summary_sheet']
+                post.source_url = data[row_data]['source_url_sheet']
+                post.google_id = int(data[row_data]['google_id_sheet'])
+                email_address = data[row_data]['author_sheet']
+                # TODO What happens if there is no user with that email?
+                post.author = User.objects.filter(email=email_address).first()
+                if post.to_field and post.do_field:
+                    post.save() # only save if has values in to and do fields
         

@@ -13,6 +13,7 @@ class Post(models.Model):
     summary = models.TextField(max_length=500, blank=True, null=True)
     clazz = models.CharField(max_length=50, default='Influence')
     likes = models.ManyToManyField('auth.User', related_name='likes')
+    google_id = models.IntegerField(blank=True, null=True)
     published_date = models.DateTimeField(
             default=timezone.now)
 

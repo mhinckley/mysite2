@@ -257,7 +257,7 @@ def follow_button(request):
 def home(request):
     return render(request, 'board/home.html')
 
-
+'''
 class GoogleDataView(View):
     @method_decorator(json_view)
     def dispatch(self, *args, **kwargs):
@@ -281,6 +281,6 @@ class GoogleDataView(View):
         post.author = User.objects.filter(email=email_address).first()
         post.save()
         return reverse("post_detail", kwargs = {"pk": self.kwargs["post"]})
-
+'''
 
 
