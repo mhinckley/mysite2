@@ -1,12 +1,36 @@
 {% extends 'board/base.html' %}
 
 {% block content %}
+
 <div style="text-align: center;">
-    <h1>New proofpoint</h1>
+		<h1>New proofpoint</h1>
     <p>Which role models, characters, or studies from class utilize or exemplify this tool?</p><br>
-    <form method="POST" class="post-form" style="font-size: 20px;">{% csrf_token %}
-        {{ form.as_p }}
+
+		<form method="POST" class="post-form" style="font-size: 20px;">{% csrf_token %}
+		        <div class="row">
+		        		<div class="col-md-2"></div>		        	
+		        		<div class="col-md-8" id="summary">Person: <br>{{ form.person }}</div>
+		        		<div class="col-md-2"></div>
+	        	</div>
+	        	<br>
+	        	<div class="row">
+		        		<div class="col-md-2"></div>		        	
+		        		<div class="col-md-8" id="summary">Explanation: <br>{{ form.caption }}</div>
+		        		<div class="col-md-2"></div>
+	        	</div>
+	        	<br>
+	        	<div class="row">
+		        		<div class="col-md-2"></div>		        	
+		        		<div class="col-md-8" id="summary">Where did you find this (link)?<br>{{ form.source_url }}</div>
+		        		<div class="col-md-2"></div>
+	        	</div>
+	        	<br>
         <button type="submit" class="btn" style="width: 200px; height: 70px; font-size: 30px; margin-top: 30px; background-color: #e01563; color: white;">Save</button>
-    </form>
+		</form>
+
+
 </div>
+
+
+
 {% endblock %}

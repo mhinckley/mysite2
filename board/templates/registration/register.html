@@ -6,11 +6,16 @@
 <div style="margin-left: 100px;">
   <h1>Create an account</h1>
   <br>
-  <form action="" method="POST" class="post-form" style="font-size: 20px;">{% csrf_token %}
-      {{ form.as_p }}
-      <button type="submit" class="btn" style="width: 200px; height: 70px; font-size: 30px; margin-top: 30px; background-color: #e01563; color: white;">Create</button>
-  </form>
-
+  <form method="POST" class="post-form" style="font-size: 20px;">{% csrf_token %}
+      	<div class="row">
+        		<div class="col-md-8">{{ form.as_p }}</div>
+        		<div class="col-md-4"></div>
+      	</div>
+      	<br>
+    		<button type="submit" class="btn" style="width: 200px; height: 70px; font-size: 30px; margin-top: 30px; background-color: #e01563; color: white;">Save</button>
+	</form>
 </div>
 {% endblock %}
+
+
 
