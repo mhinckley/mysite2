@@ -46,7 +46,7 @@ class Command(BaseCommand):
                     print(e)
         
         # Send weekly email on Sunday
-        if now.isoweekday == 7:            
+        if now.weekday() == 7:            
         # Get list of posts each user is subscribed to on a weekly basis  
             for user in users_weekly:
                 context = {
