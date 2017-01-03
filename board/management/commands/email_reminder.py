@@ -30,9 +30,10 @@ class Command(BaseCommand):
             for user in users_monthly:
                 context = {
                     'admin_name': settings.ADMINS[0][0],
-                    'user_name': user.username,
+                    'user_name': str(user.username),
                     'full_domain': helpers.get_full_domain(),
-                    'follows': user.follow_set.filter(frequency=6)
+                    'follows': user.follow_set.filter(frequency=6),
+                    'frequency': 'month'
                 }
                 template_name = 'post_reminder'
                 subject = "Here are your Monthly Tools"
@@ -51,9 +52,10 @@ class Command(BaseCommand):
             for user in users_weekly:
                 context = {
                     'admin_name': settings.ADMINS[0][0],
-                    'user_name': user.username,
+                    'user_name': str(user.username),
                     'full_domain': helpers.get_full_domain(),
-                    'follows': user.follow_set.filter(frequency=3)
+                    'follows': user.follow_set.filter(frequency=3),
+                    'frequency': 'week'
                 }
                 template_name = 'post_reminder'
                 subject = "Here are your Weekly Tools"
@@ -71,9 +73,10 @@ class Command(BaseCommand):
         for user in users_daily:
             context = {
                 'admin_name': settings.ADMINS[0][0],
-                'user_name': user.username,
+                'user_name': str(user.username),
                 'full_domain': helpers.get_full_domain(),
-                'follows': user.follow_set.filter(frequency=1)
+                'follows': user.follow_set.filter(frequency=1),
+                'frequency': 'day'
             }
             template_name = 'post_reminder'
             subject = "Here are your Daily Tools"

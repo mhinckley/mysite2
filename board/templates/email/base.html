@@ -1,8 +1,8 @@
 <div style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 14px;">
 
-    <div style="padding-top: 11px; padding-bottom: 14px; color: #355E3B;">
+    <div style="padding-top: 11px; padding-bottom: 14px; color: black;">
         <span style="display: inline-block;">
-            <span style="font-size: 30px; padding-top: 2px;">Toolkiit</span><br>
+            <span style="font-size: 20px; padding-top: 2px;">Toolkiit</span><br>
         </span>
     </div>
 
@@ -11,13 +11,23 @@
     <br>
 
     <p>
-        Hello {{ full_name }},
+        Hello {{ user_name }},
         <br><br>
+        Below are the tools I want you to focus on every {{ frequency }}:
+        <br>
         {% block content %}{% endblock %}
-        <br><br>
+        <br>
         Cheers!
         <br>
-        {{ admin_name }}
+        Your Past Self
+        <br><br>
+        <span
+          style="width: auto; display: inline-block; padding: 6px 12px; background-color: #e01563; border-radius: 3px; cursor: pointer;">
+            <a style="text-decoration: none; color: white;" target="_blank"
+               href="{{ full_domain }}{% url 'my_toolkit' %}">
+              See Your Tookiit
+            </a>
+        </span>
     </p>
     <br>
 
@@ -25,13 +35,7 @@
 
     <div style="width: 100%; padding: 8px; text-align: center;">
 
-        <span
-          style="width: auto; display: inline-block; padding: 6px 12px; background-color: #355E3B; border-radius: 3px; cursor: pointer;">
-        <a style="text-decoration: none; color: #ffffff;" target="_blank"
-           href="{{ full_domain }}">
-          Check your posts
-        </a>
-        </span>
+
 
         <div style="margin: 8px;">
             Found a bug? Have a feature request?

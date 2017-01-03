@@ -1,8 +1,15 @@
 Hello {{ user_name }},
-{% block content %}{% endblock %}
-Cheers!
-{{ admin_name }}
 
+Below are the tools I want you to focus on every {{ frequency }}:
+
+{% block content %}{% endblock %}
+
+See My Toolkiit: {{ full_domain }}{% url 'my_toolkit' %}
+
+Cheers!
+Your Past Self
+
+---
 
 Found a bug? Have a feature request? Please let us know: https://github.com/mhinckley/toolkiit/issues
 

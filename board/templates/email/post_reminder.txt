@@ -4,7 +4,7 @@
 		
 		{% for follow in follows %}
 		
-				{{ follow.post.to_field }}, you should {{ follow.post.do_field }}.\n
+				To {{ follow.post.to_field }}, you should {{ follow.post.do_field }}.
 
 		{% endfor %}
 

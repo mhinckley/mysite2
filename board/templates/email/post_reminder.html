@@ -1,16 +1,13 @@
 {% extends "email/base.html" %}
 
 {% block content %}
-
-		{% for follow in follows %}
-		                      
-        {# <a href="{% url 'post_detail' pk=post.pk %}"> #}
-            <span style="color:red;  font-weight: bold;">To </span><br><span style="color: #6ecadc;">{{ follow.post.to_field }}</span><span style="color:white; font-weight: bold;">,</span>
-            <span style="color:blue; font-weight: bold;">you should <br></span><span style="color: #e9a820;">{{ follow.post.do_field }}</span>.</span>
-        {# </a> #}
-        <br>
-
+		{% for follow in follows %}            
+        <ul style="color: black;">
+        		<li>
+        				<a href="{{ full_domain }}{% url 'post_detail' pk=follow.post.pk %}" style="font-weight: bold; background-color: black; text-decoration: none;">
+            				<span style="color: #6ecadc;">To {{ follow.post.to_field }},</span><span style="color: #e9a820;"> I should {{ follow.post.do_field }}.</span>
+        				</a>
+    				</li>
+    		</ul>
 		{% endfor %}
-
-
 {% endblock %}
