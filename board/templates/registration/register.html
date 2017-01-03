@@ -12,9 +12,14 @@
         		<div class="col-md-4"></div>
       	</div>
       	<br>
-    		<button type="submit" class="btn" style="width: 200px; height: 70px; font-size: 30px; margin-top: 30px; background-color: #e01563; color: white;">Save</button>
+    		<button type="submit" class="btn" style="width: 200px; height: 70px; font-size: 30px; margin-top: 30px; background-color: #e01563; color: white;" onclick="mixpanel.track('New User Added')">Save</button>
 	</form>
 </div>
+
+<script>
+    mixpanel.track("New User Page View")
+</script>
+
 {% endblock %}
 
 

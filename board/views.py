@@ -13,6 +13,7 @@ from django.utils.decorators import method_decorator
 from jsonview.decorators import json_view
 from django.contrib.auth.models import User
 
+
 try:
     from django.utils import simplejson as json
 except ImportError:

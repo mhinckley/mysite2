@@ -277,6 +277,7 @@
       $('.detail-btn-remind-daily').css('background-color', '#3eb991');
       $('.detail-daily-text').append(" <span class='glyphicon glyphicon-ok'></span>");
       $('.detail-btn-remind-daily').click(function(){
+            mixpanel.track('Reminder Unadded on Post Detail');
             var clicks = $(this).data('clicks');
             $(this).data("clicks", !clicks);
           })
@@ -285,6 +286,7 @@
     <script>
       $('.detail-btn-remind-daily').css('background-color', '#e01563');
       $('.detail-btn-remind-daily').click(function(){
+            mixpanel.track('Reminder Added on Post Detail');
             var clicks = $(this).data('clicks');
             $(this).data("clicks", !clicks);
           })
@@ -296,6 +298,7 @@
       $('.detail-btn-remind-weekly').css('background-color', '#3eb991');
       $('.detail-weekly-text').append(" <span class='glyphicon glyphicon-ok'></span>");
       $('.detail-btn-remind-weekly').click(function(){
+            mixpanel.track('Reminder Unadded on Post Detail');
             var clicks = $(this).data('clicks');
             $(this).data("clicks", !clicks);
           })
@@ -304,6 +307,7 @@
     <script>
       $('.detail-btn-remind-weekly').css('background-color', '#e01563');
       $('.detail-btn-remind-weekly').click(function(){
+            mixpanel.track('Reminder Added on Post Detail');
             var clicks = $(this).data('clicks');
             $(this).data("clicks", !clicks);
           })
@@ -315,6 +319,7 @@
       $('.detail-btn-remind-monthly').css('background-color', '#3eb991');
       $('.detail-monthly-text').append(" <span class='glyphicon glyphicon-ok'></span>");
       $('.detail-btn-remind-monthly').click(function(){
+            mixpanel.track('Reminder Unadded on Post Detail');
             var clicks = $(this).data('clicks');
             $(this).data("clicks", !clicks);
           })
@@ -323,6 +328,7 @@
     <script>
       $('.detail-btn-remind-monthly').css('background-color', '#e01563');
       $('.detail-btn-remind-monthly').click(function(){
+            mixpanel.track('Reminder Added on Post Detail');
             var clicks = $(this).data('clicks');
             $(this).data("clicks", !clicks);
           })
@@ -336,6 +342,7 @@
             $('.detail-like-button').css('background-color', '#3eb991').css('color', 'white');
             $('.detail-like-text').html('Saved')
             $('.detail-like-button').click(function(){
+                mixpanel.track('Post Unliked on Post Detail');
                 var pk = $(this).attr('name');
                 $.ajax({
                    type: "POST",
@@ -359,6 +366,7 @@
                 $('.detail-like-button').css('background-color', '#e01563').css('color', 'white');        
                 $('.detail-like-text').html('Save to your toolkiit')
                 $('.detail-like-button').click(function(){
+                mixpanel.track('Post Liked on Post Detail');
                 var pk = $(this).attr('name');
                 $.ajax({
                    type: "POST",
@@ -383,6 +391,10 @@
         $('.detail-like-text').html('Save to your toolkiit') 
     </script>
 {% endif %}
+
+<script>
+    mixpanel.track("Detail Post {{post.pk}} Page View")
+</script>
 
 {% endblock %}
 

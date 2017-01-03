@@ -25,12 +25,14 @@
 		        		<div class="col-md-2"></div>
 	        	</div>
 	        	<br>
-        <button type="submit" class="btn" style="width: 200px; height: 70px; font-size: 30px; margin-top: 30px; background-color: #e01563; color: white;">Save</button>
+        <button type="submit" class="btn" style="width: 200px; height: 70px; font-size: 30px; margin-top: 30px; background-color: #e01563; color: white;" onclick="mixpanel.track('New Proofpoint Added')">Save</button>
 		</form>
 
 
 </div>
 
-
+<script>
+  mixpanel.track("New Proofpoint Page View")
+</script>
 
 {% endblock %}

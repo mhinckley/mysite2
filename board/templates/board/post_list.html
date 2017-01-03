@@ -52,7 +52,7 @@
                 <div class="img-pic-container col-md-2">
                 </div>
                 <div class="img-pic-container col-md-2">
-                    <a href="/posts/Robert Moses">
+                    <a href="/posts/Robert Moses" onclick='mixpanel.track("Moses Feature Click")'>
                         <img src="{% static 'images/robert.jpg' %}" class="img-rounded img-responsive images" width="150" >
 
                         <h3 class="img-text-container"><span class="background-color-one">Robert Moses</span></h3>
@@ -60,19 +60,19 @@
                 </div>
 
                 <div class="img-pic-container col-md-2">
-                    <a href="/posts/LBJ">
+                    <a href="/posts/LBJ" onclick='mixpanel.track("LBJ Feature Click")'>
                         <img src="{% static 'images/lbj.jpg' %}" class="img-rounded img-responsive images" width="150">
                         <h3 class="img-text-container"><span class="background-color-two">LBJ</span></h3>
                     </a>
                 </div>
                 <div class="img-pic-container col-md-2">
-                    <a href="/posts/Heidi Roizen">
+                    <a href="/posts/Heidi Roizen" onclick='mixpanel.track("Heidi Feature Click")'>
                         <img src="{% static 'images/heidi.jpg' %}" class="img-rounded img-responsive images" width="150">
                         <h3 class="img-text-container"><span class="background-color-one">Heidi Roizen</span></h3>
                     </a>
                 </div>
                 <div class="img-pic-container col-md-2">
-                    <a href="/posts/Alexander Hamilton">
+                    <a href="/posts/Alexander Hamilton" onclick='mixpanel.track("Alexander Feature Click")'>
                         <img src="{% static 'images/alex.jpg' %}" class="img-rounded img-responsive images" width="150">
                         <h3 class="img-text-container"><span class="background-color-two">Alexander Hamilton</span></h3>
                     </a>
@@ -90,6 +90,11 @@
             ">
               <p>-- Your Tool Feed --</p>
         </div>
+
+
+        <script>
+          mixpanel.track("Page List Page View")
+        </script>
   
     {% else %}
         <div style="
@@ -126,11 +131,11 @@
                 <div class="post-list-parent_1 post{{ post.pk }} col-md-8">
                         <p style="color: gray; font-style: italic;">
                           {% if post.person %}
-                              <a href="{% url 'person_posts' person_or_proof=post.person %}">{{ post.person }}</a>{% if post.proof_set.all %},{% endif %}
+                              <a href="{% url 'person_posts' person_or_proof=post.person %}" onclick="mixpanel.track('Person Link Clicked')">{{ post.person }}</a>{% if post.proof_set.all %},{% endif %}
                           {% endif %}
                           {% if post.proof_set.all %} 
                               {% for proof in post.proof_set.all %}
-                                  <a href="{% url 'person_posts' person_or_proof=proof.person %}">{{ proof.person }}</a>{% if post.proof_set.count > 1  %},{% endif %}
+                                  <a href="{% url 'person_posts' person_or_proof=proof.person %}" onclick="mixpanel.track('Person Link Clicked')">{{ proof.person }}</a>{% if post.proof_set.count > 1  %},{% endif %}
                               {% endfor %}
                           {% endif %}
                           {% if post.person or post.proof_set.all %}
@@ -143,17 +148,17 @@
                               
                           {% if user.is_authenticated %}
                               {% if post in liked_posts %}
-                                  <button type="button" class="btn btn-default-sm post-list-like-button" name="{{ post.id }}" style="background-color: #3eb991; color: white;" />
+                                  <button type="button" class="btn btn-default-sm post-list-like-button" name="{{ post.id }}" style="background-color: #3eb991; color: white;" onclick="mixpanel.track('Post Unliked on Post_List');"/>
                                       <span class="glyphicon glyphicon-saved like_count post-list-like-text" aria-hidden="true" style="font-size: 25px;"></span><span></span>
                                   </button>
                               {% else %}
-                                  <button type="button" class="btn btn-default-sm post-list-like-button" name="{{ post.id }}" style="background-color: #e01563; color: white;" />
+                                  <button type="button" class="btn btn-default-sm post-list-like-button" name="{{ post.id }}" style="background-color: #e01563; color: white;" onclick="mixpanel.track('Post Liked on My Toolkiit');"/>
                                       <span class="glyphicon glyphicon-save like_count post-list-like-text" aria-hidden="true" style="font-size: 16px"></span><span> Save</span>
                                   </button>
                               {% endif %}
                         {% else %}
                                   <a href="{% url 'register' %}">
-                                      <button type="button" class="btn btn-default-sm post-list-like-button" name="{{ post.id }}" style="background-color: #e01563; color: white;" />
+                                      <button type="button" class="btn btn-default-sm post-list-like-button" name="{{ post.id }}" style="background-color: #e01563; color: white;" onclick="mixpanel.track('Un-Auth Post Liked on My Toolkiit');"/>
                                           <span class="glyphicon glyphicon-save like_count post-list-like-text" aria-hidden="true" style="font-size: 16px;"></span><span> Save</span>
                                       </button>
                                   </a>
@@ -161,7 +166,7 @@
 
                     </div>
 
-                    <a href="{% url 'post_detail' pk=post.pk %}">
+                    <a href="{% url 'post_detail' pk=post.pk %}" onclick="mixpanel.track('Post Detail Link Click From Post_List')">
                         <button class="post-list-to_should_section col-md-6 img-rounded">
                             <span style="color:white;  font-weight: bold;">To </span><br><span style="color: #6ecadc;">{{ post.to_field }}</span><span style="color:white; font-weight: bold;">,</span>
                             <br><br>
@@ -180,7 +185,7 @@
                     <ul class="pagination">
                       <li class="page-item">
                       {% if posts.has_previous %}
-                        <a class="page-link" href="?page={{ posts.previous_page_number }}" aria-label="Previous">
+                        <a class="page-link" href="?page={{ posts.previous_page_number }}" aria-label="Previous" onclick="mixpanel.track('Previous Paginator Click From Post_List')">
                       {% else %}
                         <a class="page-link" id="dead-link" aria-label="Previous">
                       {% endif %}
@@ -191,7 +196,7 @@
                       <li class="page-item"><a class="page-link" id="dead-link">Page {{ posts.number }} of {{ posts.paginator.num_pages }}</a></li>
                       <li class="page-item">
                       {% if posts.has_next %}
-                        <a class="page-link" href="?page={{ posts.next_page_number }}" aria-label="Previous">
+                        <a class="page-link" href="?page={{ posts.next_page_number }}" aria-label="Previous" onclick="mixpanel.track('Next Paginator Click From Post_List')">
                       {% else %}
                         <a class="page-link" aria-label="Next" id="dead-link">
                       {% endif %}
@@ -202,6 +207,7 @@
                     </ul>
                   </nav>
               </div>
+
             {% endif %}
 
         </div>

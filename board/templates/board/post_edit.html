@@ -26,9 +26,13 @@
 		        		<div class="col-md-8" id="summary">More explanation: <br>{{ form.summary }}</div>
 		        		<div class="col-md-2"></div>
 	        	</div>
-        <button type="submit" class="btn" style="width: 200px; height: 70px; font-size: 30px; margin-top: 30px; background-color: #e01563; color: white;">Save</button>
+        <button type="submit" class="btn" style="width: 200px; height: 70px; font-size: 30px; margin-top: 30px; background-color: #e01563; color: white;" onclick="mixpanel.track('New Tool Added')">Save</button>
 		</form>
 
 
 </div>
+
+<script>
+    mixpanel.track("Add Tool Page View")
+</script>
 {% endblock %}

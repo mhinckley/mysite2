@@ -29,11 +29,11 @@
                 <div class="post-list-parent_1 post{{ post.pk }}">
                     <div class="post-list-vote col-md-2">
                         {% if post in liked_posts %}
-                            <button type="button" class="btn btn-default-sm post-list-like-button" name="{{ post.id }}" style="background-color: #3eb991; color: white;" />
+                            <button type="button" class="btn btn-default-sm post-list-like-button" name="{{ post.id }}" style="background-color: #3eb991; color: white;" onclick="mixpanel.track('Post Unliked on My Toolkiit');"/>
                                 <span class="glyphicon glyphicon-saved like_count post-list-like-text" aria-hidden="true" style="font-size: 25px;"></span><span></span>
                             </button>
                         {% else %}
-                            <button type="button" class="btn btn-default-sm post-list-like-button" name="{{ post.id }}" style="background-color: #e01563; color: white;" />
+                            <button type="button" class="btn btn-default-sm post-list-like-button" name="{{ post.id }}" style="background-color: #e01563; color: white;" onclick="mixpanel.track('Post Liked on My Toolkiit');" />
                                 <span class="glyphicon glyphicon-save like_count post-list-like-text" aria-hidden="true" style="font-size: 16px"></span><span> Save</span>
                             </button>
                         {% endif %}
@@ -179,6 +179,10 @@
         })
       </script>
   {% endif %}
+
+<script>
+    mixpanel.track("My Toolkiit Page View")
+</script>
 
 {% endblock %}
 
