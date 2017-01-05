@@ -1,0 +1,66 @@
+
+.mytoolkit-header {
+		font-size: 30px;
+	  color: black;
+	  font-weight: bolder;
+	  text-align: center;
+	  margin-top: 20px;
+}
+
+.mytoolkit-subheader {
+		font-size: 20px;
+	  color: black;
+	  text-align: center;
+    margin-bottom: 30px;
+}
+
+.mytoolkit-reminder-heading {
+		padding-top: 20px;
+		font-size: 20px;
+}
+
+.mytoolkit-list-parent_1 {
+  width: 100%;
+  font-size: 16px;
+  padding: 10px;
+  float: left;
+}
+
+
+.mytoolkit-remind-button {
+    width: 100px;
+    height: 40px;
+    background-color: black; 
+    color: white;
+    font-size: 16px;
+    border-color: white;
+}
+
+.mytoolkit-follow-options {
+     background:none!important;
+     border:none; 
+     padding-left: 20px;
+     font: inherit;
+}
+
+
+.mytoolkit-list-to_should_button {
+    text-align: left;
+    min-height: 40px;
+    height: 100%;
+    background-color: black;
+    color: white; 
+    padding: 10px;
+    padding-left: 20px;
+    padding-right: 20px; 
+    border: 0px;
+    float: left;
+    margin-left: 40px;
+}
+
+.mytoolkit-list-to_text {
+		color: #6ecadc;
+}
+.mytoolkit-list-should_text {
+		color: #e9a820;
+}

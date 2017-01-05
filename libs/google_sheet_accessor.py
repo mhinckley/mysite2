@@ -9,11 +9,34 @@ from oauth2client import tools
 from oauth2client.file import Storage
 
 
+# try:
+#     import argparse
+#     flags = argparse.ArgumentParser(parents=[tools.argparser]).parse_args()
+#     print(type(flags))
+#     print(flags)
+# except ImportError:
+#     flags = None
+
+
 # If modifying these scopes, delete your previously saved credentials
 # at ~/.credentials/sheets.googleapis.com-python-quickstart.json
 SCOPES = 'https://www.googleapis.com/auth/spreadsheets.readonly'
-CLIENT_SECRET_FILE = 'client_secret.json'
+CLIENT_SECRET_FILE = os.path.join(os.getcwd(), 'libs', 'client_secret.json')
 APPLICATION_NAME = 'Toolkiit'
+
+
+# Hack up a class to handle the required  flags to oauth flow
+"""
+usage: manage.py [-h] [--auth_host_name AUTH_HOST_NAME]
+                 [--noauth_local_webserver]
+                 [--auth_host_port [AUTH_HOST_PORT [AUTH_HOST_PORT ...]]]
+                 [--logging_level {DEBUG,INFO,WARNING,ERROR,CRITICAL}]
+"""
+class FlowFlags(object):
+    noauth_local_webserver = None
+    auth_host_name = ''
+    auth_host_port = ''
+    logging_level = 'DEBUG'
 
 
 def get_credentials():
@@ -34,14 +57,16 @@ def get_credentials():
 
     store = Storage(credential_path)
     credentials = store.get()
-    if not credentials or credentials.invalid:
-        flow = client.flow_from_clientsecrets(CLIENT_SECRET_FILE, SCOPES)
-        flow.user_agent = APPLICATION_NAME
-        if flags:
-            credentials = tools.run_flow(flow, store, flags)
-        else: # Needed only for compatibility with Python 2.6
-            credentials = tools.run(flow, store)
-        print('Storing credentials to ' + credential_path)
+    #if not credentials or credentials.invalid:
+    flow = client.flow_from_clientsecrets(CLIENT_SECRET_FILE, SCOPES)
+    flow.user_agent = APPLICATION_NAME
+    flags = FlowFlags()
+    #if flags:
+    #credentials = tools.run_flow(flow, store, flags)
+    credentials = tools.run_flow(flow, store, flags)
+    #else: # Needed only for compatibility with Python 2.6
+    #    credentials = tools.run(flow, store)
+    print('Storing credentials to ' + credential_path)
     return credentials
 
 

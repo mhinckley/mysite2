@@ -23,6 +23,9 @@ class Command(BaseCommand):
         users_daily = User.objects.filter(follow__frequency=1).distinct()
         users_weekly = User.objects.filter(follow__frequency=3).distinct()
         users_monthly = User.objects.filter(follow__frequency=6).distinct()
+
+        print('now.day: %s (%s)' % (now.day, type(now.day)))
+        print('now.weekday: %s (%s)' % (now.weekday(), type(now.weekday())))
         
         # Send monthly email
         if now.day == 1:            

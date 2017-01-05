@@ -144,12 +144,12 @@
                         </p>
                 
 
-                    <div class="post-list-vote col-md-2">
+                    <div class="col-md-2">
                               
                           {% if user.is_authenticated %}
                               {% if post in liked_posts %}
                                   <button type="button" class="btn btn-default-sm post-list-like-button" name="{{ post.id }}" style="background-color: #3eb991; color: white;" onclick="mixpanel.track('Post Unliked on Post_List');"/>
-                                      <span class="glyphicon glyphicon-saved like_count post-list-like-text" aria-hidden="true" style="font-size: 25px;"></span><span></span>
+                                      <span class="glyphicon glyphicon-saved like_count post-list-like-text" aria-hidden="true" style="font-size: 16px;"></span><span></span>
                                   </button>
                               {% else %}
                                   <button type="button" class="btn btn-default-sm post-list-like-button" name="{{ post.id }}" style="background-color: #e01563; color: white;" onclick="mixpanel.track('Post Liked on My Toolkiit');"/>
