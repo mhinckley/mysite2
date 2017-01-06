@@ -49,6 +49,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'board',
     'django.contrib.sites', # Added to run management tasks
+    'django.contrib.algoliasearch',
 )
 
 SITE_ID = 1 # Added to run management tasks, along with the installed Sites app above
@@ -144,5 +145,10 @@ if not EMAIL_HOST_PASSWORD:
     EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
     EMAIL_FILE_PATH = os.path.join(HOME_DIR, 'mysite', 'emails')
 
-
+# Add Algolia settings
+ALGOLIA = {
+    'APPLICATION_ID': "SDMCCB8HOO",
+    'API_KEY': 'c8279f3e0e2aae4c60f944829c94274e',
+    'SEARCH_API_KEY': 'a5314e979ae881a0cf7154f9a9e78462'
+}
 

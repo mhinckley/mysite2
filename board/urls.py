@@ -5,7 +5,7 @@ urlpatterns = [
     url(r'^$', views.post_list, name='post_list'),
     url(r'^post/(?P<pk>\d+)/$', views.post_detail, name='post_detail'),
     url(r'^post/new/$', views.post_new, name='post_new'),
-    url(r'^posts/class/(?P<clazz>[a-zA-Z "-]+)/$', views.clazz_posts, name='clazz_posts'),
+    #url(r'^posts/class/(?P<clazz>[a-zA-Z "-]+)/$', views.clazz_posts, name='clazz_posts'),
     #url(r'^post/when/(?P<when>[a-zA-Z ]+)/$', views.remember_posts, name='remember_posts'),
     url(r'^posts/user/(?P<author>[a-zA-Z0-9_-]+)/$', views.user_posts, name='user_posts'),
     url(r'^mytoolkit/$', views.my_toolkit, name='my_toolkit'), # No longer needs to be above person url because I took "post/" out of it 
@@ -17,10 +17,11 @@ urlpatterns = [
     url(r'^like/$', views.like_button, name='like_button'),
     url(r'^follow/$', views.follow_button, name='follow_button'),
     url(r'^home/$', views.home, name='home'),
+]
 
     # JSON REST API 
     #url(r'^notification/$', views.GoogleDataView.as_view(), name='google_data_view'),
-]
+
 
 
 

@@ -12,12 +12,21 @@ from libs import google_sheet_accessor
 from django.utils.decorators import method_decorator
 from jsonview.decorators import json_view
 from django.contrib.auth.models import User
+from django.contrib.algoliasearch import get_adapter
+from django.conf import settings
 
 
 try:
     from django.utils import simplejson as json
 except ImportError:
     import json
+
+algolia_context = {
+        'appID': settings.ALGOLIA['APPLICATION_ID'],
+        'searchKey': settings.ALGOLIA['SEARCH_API_KEY'],
+        'indexName': get_adapter(Post).index_name
+}
+
 
 
 def post_list(request):
@@ -37,7 +46,12 @@ def post_list(request):
         # If page is out of range (e.g. 9999), deliver last page of results.
         posts = paginator.page(paginator.num_pages)
 
-    return render(request, 'board/post_list.html', {'posts': posts, 'liked_posts': liked_posts})
+    context = {}
+    view_context = {'posts': posts, 'liked_posts': liked_posts}
+    context.update(algolia_context)
+    context.update(view_context)
+
+    return render(request, 'board/post_list.html', context)
 
 
 def post_detail(request, pk):
@@ -46,8 +60,14 @@ def post_detail(request, pk):
     daily_post = len(post.follow_set.filter(user=request.user.pk, frequency=Follow.DAILY)) #TRUE (1) OR FALSE (0) if following daily
     weekly_post = len(post.follow_set.filter(user=request.user.pk, frequency=Follow.WEEKLY)) #TRUE (1) OR FALSE (0) if following weekly
     monthly_post = len(post.follow_set.filter(user=request.user.pk, frequency=Follow.MONTHLY)) #TRUE (1) OR FALSE (0) if following monthly
-    return render(request, 'board/post_detail.html', {'post': post, 'liked_posts': liked_posts, 
-        'daily_post': daily_post, 'weekly_post': weekly_post, 'monthly_post': monthly_post})
+    
+    context = {}
+    view_context = {'post': post, 'liked_posts': liked_posts, 
+        'daily_post': daily_post, 'weekly_post': weekly_post, 'monthly_post': monthly_post}
+    context.update(algolia_context)
+    context.update(view_context)
+
+    return render(request, 'board/post_detail.html', context)
 
 
 def post_new(request):
@@ -61,11 +81,17 @@ def post_new(request):
             return redirect('post_detail', pk=post.pk)
     else:
         form = PostForm()
-    return render(request, 'board/post_edit.html', {'form': form})
 
-def clazz_posts(request, clazz):
-    posts = Post.objects.filter(clazz=clazz).order_by('-published_date')
-    return render(request, 'board/post_list.html', {'posts': posts})
+    context = {}
+    view_context = {'form': form}
+    context.update(algolia_context)
+    context.update(view_context)
+
+    return render(request, 'board/post_new.html', context)
+
+#def clazz_posts(request, clazz):
+#    posts = Post.objects.filter(clazz=clazz).order_by('-published_date')
+#    return render(request, 'board/post_list.html', {'posts': posts})
 
 #def genre_posts(request, content_type):
 #    posts = Post.objects.filter(content_type=content_type).order_by('-published_date')
@@ -77,11 +103,23 @@ def clazz_posts(request, clazz):
 
 def user_posts(request, author):
     posts = Post.objects.filter(author__username=author).order_by('-published_date')
-    return render(request, 'board/post_list.html', {'posts': posts})
+
+    context = {}
+    view_context = {'posts': posts}
+    context.update(algolia_context)
+    context.update(view_context)
+
+    return render(request, 'board/post_list.html', context)
 
 def to_posts(request, to_field):
     posts = Post.objects.filter(to_field=to_field).order_by('-published_date')
-    return render(request, 'board/post_list.html', {'posts': posts})
+
+    context = {}
+    view_context = {'posts': posts}
+    context.update(algolia_context)
+    context.update(view_context)
+
+    return render(request, 'board/post_list.html', context)
 
 def my_toolkit(request):
     user = request.user
@@ -109,10 +147,16 @@ def my_toolkit(request):
         # Get all remaining posts that user has created
         my_remainder_posts = my_posts.exclude(id__in=saved_for_later_post_ids).exclude(id__in=all_follow_posts_ids)
         
-        # to debug you can put "print liked_posts" into a view or "print anything"    
-        return render(request, 'board/mytoolkit.html', {'liked_posts': liked_posts,
+        # to debug you can put "print liked_posts" into a view or "print anything"
+
+        context = {}
+        view_context = {'liked_posts': liked_posts,
             'daily_posts': daily_posts, 'weekly_posts': weekly_posts, 'monthly_posts': monthly_posts,
-            'saved_for_later_posts': saved_for_later_posts, 'my_remainder_posts': my_remainder_posts})
+            'saved_for_later_posts': saved_for_later_posts, 'my_remainder_posts': my_remainder_posts}
+        context.update(algolia_context)
+        context.update(view_context)
+
+        return render(request, 'board/mytoolkit.html', context)
 
     else:
         return redirect('../login/')
@@ -127,7 +171,13 @@ def person_posts(request, person_or_proof):
     person_from_posts = Post.objects.filter(person__iexact=person_or_proof)
     person_from_proofs = Post.objects.filter(proof__person__iexact=person_or_proof)
     posts = person_from_posts | person_from_proofs 
-    return render(request, 'board/post_list.html', {'posts': posts})
+
+    context = {}
+    view_context = {'posts': posts}
+    context.update(algolia_context)
+    context.update(view_context)
+
+    return render(request, 'board/post_list.html', context)
 
 
 def register(request):
@@ -144,9 +194,13 @@ def register(request):
 
     else:
         form = EmailUserCreationForm()
-    return render(request, "registration/register.html", {
-        'form': form,
-    })
+
+    context = {}
+    view_context = {'form': form}
+    context.update(algolia_context)
+    context.update(view_context)
+
+    return render(request, "registration/register.html", context)
 
 
 def user_login(request):
@@ -184,9 +238,34 @@ def user_login(request):
     else:
         # No context variables to pass to the template system, hence the
         # blank dictionary object...
-        return render(request, 'registration/login.html', {})
+        context = {}
+        view_context = {}
+        context.update(algolia_context)
+        context.update(view_context)
+        return render(request, 'registration/login.html', context)
 
+'''
+def proof_new(request):
+    if request.method == "POST":
+        form = PostForm(request.POST)
+        if form.is_valid():
+            proof = form.save(commit=False)
+            proof.author = request.user
+            proof.created_date = timezone.now()
+            proof.post = Post.objects.get(pk=pk)
+            proof.save()
+            return redirect('post_detail', pk=post.pk)
+    else:
+        form = ProofForm()
 
+    context = {}
+    view_context = {'form': form}
+    context.update(algolia_context)
+    context.update(view_context)
+
+    return render(request, 'board/proof_new.html', context)
+
+'''
 class ProofCreate(CreateView):
     model = Proof
     fields = ['person', 'caption', 'source_url']
@@ -285,5 +364,6 @@ class GoogleDataView(View):
         post.save()
         return reverse("post_detail", kwargs = {"pk": self.kwargs["post"]})
 '''
+
 
 
