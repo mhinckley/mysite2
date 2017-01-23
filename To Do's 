@@ -3,8 +3,11 @@
 1) Outbound email handing (weekly and monthly)
 2) Inbound email handling
 3) Add context to class based views; need to pass the algolia data to class based form views
-4) Make it possible to click the links of search results on Algolia
-5) Search results page
+4) Make it possible to click the links of Algolia auto-complete search results on Algolia
+5) Search results page for algolia
+6) Schedule refresh of Algolia index
+7) Person page - image of them + posts they've added or been mentioned in
+
 
 
 

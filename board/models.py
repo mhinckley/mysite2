@@ -145,3 +145,7 @@ class PostTag(models.Model):
 
     def __str__(self):
         return self.tag.text
+
+class Name(models.Model):
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)

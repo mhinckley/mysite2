@@ -1,0 +1,68 @@
+{% load staticfiles %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Angular</title>
+  
+
+
+</head>
+<body ng-app="demoapp">
+    <h1>Django Angular</h1>
+
+    <div ng-controller="DemoCtrl">
+        <div class="data">
+            Click:
+        </div>
+        <button ng-click="save()">Get Time</button>
+        <hr />
+    </div>
+    <div ng-controller="NameCtrl">
+        <ul>
+            <li ng-repeat=" user in users">{[{user.first_name}]} {[{user.last_name}]}</li>
+        </ul>
+    </div>
+
+    <div ng-controller="AddNameCtrl">
+      <form ng-submit="save(name)">
+        {% csrf_token %}
+        <input type="text" ng-model="name.first_name" placeholder="First Name" /><br />
+        <input type="text" ng-model="name.last_name" placeholder="Last Name" /><br />
+        <input type="submit" value="Submit Name" />
+      </form>
+      <div class="message">
+      </div>
+    </div>
+
+
+    <div ng-controller="NameTwoCtrl">
+      <div>
+        <ul>
+          <li ng-repeat="name in names">{[{ name.first_name }]} {[{ name.last_name }]}</li>
+        </ul>
+      </div>
+      <form ng-submit="save(name)">
+        {% csrf_token %}
+        <input type="text" ng-model="name.first_name" placeholder="First Name" /><br />
+        <input type="text" ng-model="name.last_name" placeholder="Last Name" /><br />
+        <input type="submit" value="Submit Name" />
+      </form>
+      <div class="message">
+      </div>
+    </div>
+
+
+</body>
+
+
+</body>
+</html>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+<script type="text/javascript" src="//code.angularjs.org/1.4.8/angular-resource.js"></script>
+<script type="text/javascript" src="{% static "js/csrf.js" %}"></script>
+<script type="text/javascript" src="{% static "js/main.js" %}"></script>
+</body>
+</html>

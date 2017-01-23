@@ -1,12 +1,12 @@
 from django.shortcuts import render, redirect, render, get_object_or_404
 from django.utils import timezone
 from .models import Post, Proof, Comment, Follow, Tag, PostTag
-from .forms import PostForm, EmailUserCreationForm
+from .forms import PostForm, EmailUserCreationForm, NameForm
 from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.views.generic import View, CreateView
+from django.views.generic import View, CreateView, TemplateView, FormView
 from django.core.urlresolvers import reverse
 from libs import google_sheet_accessor 
 from django.utils.decorators import method_decorator
@@ -338,6 +338,33 @@ def follow_button(request):
 
 def home(request):
     return render(request, 'board/home.html')
+
+def angular(request):
+    return render(request, 'board/angular.html')
+
+class DataView(FormView):
+    form_class = NameForm
+    template_name = 'angular.html'
+
+    def form_valid(self, form):
+        return JsonResponse({'message': 'Thank you for your information'})
+
+    def form_invalid(self, form):
+        return JsonResponse(form.errors)
+
+
+class NameView(View):
+    def get(self, request, *args, **kwargs):
+        names = Name.objects.filter(published_date__lte=timezone.now()).order_by('-published_date')
+        data = json.dumps(names)
+
+        return HttpResponse(data, content_type='application/json')
+
+    def post(self, request, *args, **kwargs):
+        return JsonResponse(
+            {'id': 1, 'first_name': first_name, 'last_name': 'Jacob'}, status=201)
+
+
 
 '''
 class GoogleDataView(View):

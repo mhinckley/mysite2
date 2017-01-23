@@ -1,0 +1,616 @@
+#### Importing
+
+>>> from board.models import Post
+>>> import board.models
+>>> from django.contrib.auth.models import User
+
+
+
+#### Post Objects
+
+>>> Post.objects.all()
+
+    [<Post: another post>, <Post: have more confidence>, <Post: have more creative ideas>, <Post: have shorter meetings>, <Post: be influential>, <Post: be "great">, <Post: find your career calling>, <Post: get a check from Len Lodish>, <Post: make better career decisions>, <Post: build an ambitious company>, <Post: hire the best startup team members>, <Post: be a better boyfriend>, <Post: hire the best startup team members>, <Post: build awesome company brand and culture>, <Post: floating>, <Post: hello>, <Post: hello>, <Post: cultivate focus>]
+
+>>> posts = Post.objects.all()
+
+>>> posts.filter(author=1)
+    
+    [<Post: be "great">, <Post: find your career calling>, <Post: get a check from Len Lodish>, <Post: make better career decisions>, <Post: build an ambitious company>, <Post: hire the best startup team members>]
+
+>>> posts.filter(likes=1)
+
+    [<Post: have more confidence>, <Post: be influential>, <Post: have more creative ideas>, <Post: hire the best startup team members>, <Post: have shorter meetings>, <Post: another post>]
+
+>>> users = User.objects.filter(follow__frequency=1)  
+
+>>> users.count()
+    
+    4
+
+>>> user = users[2]
+
+>>> user.follow_set
+    
+    <django.db.models.fields.related.RelatedManager object at 0x10fed8250>
+
+>>> user.follow_set.all()
+
+    [<Follow: Follow object>, <Follow: Follow object>, <Follow: Follow object>, <Follow: Follow object>]
+
+>>> user.follow_set.filter(frequency=1)
+
+    [<Follow: Follow object>, <Follow: Follow object>]
+
+>>> dir(user)
+
+    ['DoesNotExist', 'Meta', 'MultipleObjectsReturned', 'REQUIRED_FIELDS', 'USERNAME_FIELD', '__class__', '__delattr__', '__dict__', '__doc__', '__eq__', '__format__', '__getattribute__', '__hash__', '__init__', u'__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__setstate__', '__sizeof__', '__str__', '__subclasshook__', '__unicode__', '__weakref__', '_base_manager', '_check_column_name_clashes', '_check_field_name_clashes', '_check_fields', '_check_id_field', '_check_index_together', '_check_local_fields', '_check_long_column_names', '_check_m2m_through_same_relationship', '_check_managers', '_check_model', '_check_ordering', '_check_swappable', '_check_unique_together', '_default_manager', '_deferred', '_do_insert', '_do_update', '_get_FIELD_display', '_get_next_or_previous_by_FIELD', '_get_next_or_previous_in_order', '_get_pk_val', '_get_unique_checks', '_meta', '_perform_date_checks', '_perform_unique_checks', '_save_parents', '_save_table', '_set_pk_val', '_state', 'check', 'check_password', 'clean', 'clean_fields', 'comment_set', 'date_error_message', 'date_joined', 'delete', 'email', 'email_user', 'first_name', 'follow_set', 'from_db', 'full_clean', 'get_all_permissions', 'get_deferred_fields', 'get_full_name', 'get_group_permissions', 'get_next_by_date_joined', 'get_previous_by_date_joined', 'get_session_auth_hash', 'get_short_name', 'get_username', 'groups', 'has_module_perms', 'has_perm', 'has_perms', 'has_usable_password', 'id', 'is_active', 'is_anonymous', 'is_authenticated', 'is_staff', 'is_superuser', 'last_login', 'last_name', 'likes', 'logentry_set', 'natural_key', 'objects', 'password', 'pk', 'post_set', 'prepare_database_save', 'proof_set', 'refresh_from_db', 'save', 'save_base', 'serializable_value', 'set_password', 'set_unusable_password', 'unique_error_message', 'user_permissions', 'username', 'validate_unique']
+
+
+#### USER OBJECTS
+
+>>> User.objects.all()
+    
+    [<User: mike>, <User: mhinckley>]
+
+>>> users = User.objects.filter(follow__frequency=1)
+
+>>> users
+
+    [<User: mike>, <User: mike>, <User: mhinckley>, <User: mhinckley>]
+
+>>> for user in users:
+...     daily_follows = user.follow_set.filter(frequency=1)
+... 
+
+>>> daily_follows
+
+    [<Follow: Follow object>, <Follow: Follow object>]
+
+>>> dir(daily_follows)
+    
+    ['__and__', '__bool__', '__class__', '__deepcopy__', '__delattr__', '__dict__', '__doc__', '__format__', '__getattribute__', '__getitem__', '__getstate__', '__hash__', '__init__', '__iter__', '__len__', '__module__', '__new__', '__nonzero__', '__or__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__setstate__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_add_hints', '_as_sql', '_batched_insert', '_clone', '_create_object_from_params', '_db', '_earliest_or_latest', '_extract_model_params', '_fetch_all', '_filter_or_exclude', '_for_write', '_has_filters', '_hints', '_insert', '_known_related_objects', '_merge_known_related_objects', '_merge_sanity_check', '_next_is_sticky', '_populate_pk_values', '_prefetch_done', '_prefetch_related_lookups', '_prefetch_related_objects', '_prepare', '_raw_delete', '_result_cache', '_setup_aggregate_query', '_sticky_filter', '_update', 'aggregate', 'all', 'annotate', 'as_manager', 'bulk_create', 'complex_filter', 'count', 'create', 'dates', 'datetimes', 'db', 'defer', 'delete', 'distinct', 'earliest', 'exclude', 'exists', 'extra', 'filter', 'first', 'get', 'get_or_create', 'in_bulk', 'is_compatible_query_object_type', 'iterator', 'last', 'latest', 'model', 'none', 'only', 'order_by', 'ordered', 'prefetch_related', 'query', 'raw', 'reverse', 'select_for_update', 'select_related', 'update', 'update_or_create', 'using', 'value_annotation', 'values', 'values_list']
+
+>>> daily_follows.last
+
+    <bound method QuerySet.last of [<Follow: Follow object>, <Follow: Follow object>]>
+
+>>> daily_follows.all()
+
+    [<Follow: Follow object>, <Follow: Follow object>]
+
+>>> User.objects.filter(follow__frequency=1)
+    
+    [<User: mike>, <User: mike>, <User: mhinckley>, <User: mhinckley>]
+
+>>> users
+
+    [<User: mike>, <User: mike>, <User: mhinckley>, <User: mhinckley>]
+
+>>> users.last
+    
+    <bound method QuerySet.last of [<User: mike>, <User: mike>, <User: mhinckley>, <User: mhinckley>]>
+
+>>> users.last()
+
+    <User: mike>
+
+>>> users.last().username
+    
+    u'mike'
+
+>>> users.last().follow_set.filter(frequency=1)
+
+    [<Follow: Follow object>, <Follow: Follow object>]
+
+>>> users.last().follow_set.filter(frequency=1).last()
+    
+    <Follow: Follow object>
+
+>>> obfol = users.last().follow_set.filter(frequency=1).last()
+    
+>>> dir(obfol)
+    
+    ['DAILY', 'DoesNotExist', 'FREQUENCY_CHOICES', 'MONTHLY', 'MultipleObjectsReturned', 'WEEKLY', '__class__', '__delattr__', '__dict__', '__doc__', '__eq__', '__format__', '__getattribute__', '__hash__', '__init__', u'__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__setstate__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_base_manager', '_check_column_name_clashes', '_check_field_name_clashes', '_check_fields', '_check_id_field', '_check_index_together', '_check_local_fields', '_check_long_column_names', '_check_m2m_through_same_relationship', '_check_managers', '_check_model', '_check_ordering', '_check_swappable', '_check_unique_together', '_default_manager', '_deferred', '_do_insert', '_do_update', '_get_FIELD_display', '_get_next_or_previous_by_FIELD', '_get_next_or_previous_in_order', '_get_pk_val', '_get_unique_checks', '_meta', '_perform_date_checks', '_perform_unique_checks', '_save_parents', '_save_table', '_set_pk_val', '_state', '_user_cache', 'check', 'clean', 'clean_fields', 'date_error_message', 'delete', 'frequency', 'from_db', 'full_clean', 'get_deferred_fields', 'get_frequency_display', 'id', 'objects', 'pk', 'post', 'post_id', 'prepare_database_save', 'refresh_from_db', 'save', 'save_base', 'serializable_value', 'unique_error_message', 'user', 'user_id', 'validate_unique']
+
+>>> obfol.post
+
+    <Post: build awesome company brand and culture>
+
+>>> users.last().follow_set.filter(frequency=1).last().post
+
+    <Post: build awesome company brand and culture>
+
+>>> dir(users.last().follow_set.filter(frequency=1))
+    
+    ['__and__', '__bool__', '__class__', '__deepcopy__', '__delattr__', '__dict__', '__doc__', '__format__', '__getattribute__', '__getitem__', '__getstate__', '__hash__', '__init__', '__iter__', '__len__', '__module__', '__new__', '__nonzero__', '__or__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__setstate__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_add_hints', '_as_sql', '_batched_insert', '_clone', '_create_object_from_params', '_db', '_earliest_or_latest', '_extract_model_params', '_fetch_all', '_filter_or_exclude', '_for_write', '_has_filters', '_hints', '_insert', '_known_related_objects', '_merge_known_related_objects', '_merge_sanity_check', '_next_is_sticky', '_populate_pk_values', '_prefetch_done', '_prefetch_related_lookups', '_prefetch_related_objects', '_prepare', '_raw_delete', '_result_cache', '_setup_aggregate_query', '_sticky_filter', '_update', 'aggregate', 'all', 'annotate', 'as_manager', 'bulk_create', 'complex_filter', 'count', 'create', 'dates', 'datetimes', 'db', 'defer', 'delete', 'distinct', 'earliest', 'exclude', 'exists', 'extra', 'filter', 'first', 'get', 'get_or_create', 'in_bulk', 'is_compatible_query_object_type', 'iterator', 'last', 'latest', 'model', 'none', 'only', 'order_by', 'ordered', 'prefetch_related', 'query', 'raw', 'reverse', 'select_for_update', 'select_related', 'update', 'update_or_create', 'using', 'value_annotation', 'values', 'values_list']
+
+>>> dir(users.last().follow_set.filter(frequency=1))
+    
+    ['__and__', '__bool__', '__class__', '__deepcopy__', '__delattr__', '__dict__', '__doc__', '__format__', '__getattribute__', '__getitem__', '__getstate__', '__hash__', '__init__', '__iter__', '__len__', '__module__', '__new__', '__nonzero__', '__or__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__setstate__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_add_hints', '_as_sql', '_batched_insert', '_clone', '_create_object_from_params', '_db', '_earliest_or_latest', '_extract_model_params', '_fetch_all', '_filter_or_exclude', '_for_write', '_has_filters', '_hints', '_insert', '_known_related_objects', '_merge_known_related_objects', '_merge_sanity_check', '_next_is_sticky', '_populate_pk_values', '_prefetch_done', '_prefetch_related_lookups', '_prefetch_related_objects', '_prepare', '_raw_delete', '_result_cache', '_setup_aggregate_query', '_sticky_filter', '_update', 'aggregate', 'all', 'annotate', 'as_manager', 'bulk_create', 'complex_filter', 'count', 'create', 'dates', 'datetimes', 'db', 'defer', 'delete', 'distinct', 'earliest', 'exclude', 'exists', 'extra', 'filter', 'first', 'get', 'get_or_create', 'in_bulk', 'is_compatible_query_object_type', 'iterator', 'last', 'latest', 'model', 'none', 'only', 'order_by', 'ordered', 'prefetch_related', 'query', 'raw', 'reverse', 'select_for_update', 'select_related', 'update', 'update_or_create', 'using', 'value_annotation', 'values', 'values_list']
+
+>>> users.last().follow_set.filter(frequency=1).all()
+    
+    [<Follow: Follow object>, <Follow: Follow object>]
+
+>>> users.last().follow_set.filter(frequency=1).all()
+
+    [<Follow: Follow object>, <Follow: Follow object>]
+
+>>> users.last().follow_set.filter(frequency=1).last()
+    
+    <Follow: Follow object>
+
+>>> users.last().follow_set.filter(frequency=1).last().post
+    
+    <Post: build awesome company brand and culture>
+
+>>> users.last().follow_set.filter(frequency=1).last().post.do_field
+
+  u'pick 5 words that defines it'
+
+>>> users.last().follow_set.filter(frequency=1).last().post
+    
+    <Post: build awesome company brand and culture>
+
+>>> users.last().follow_set.filter(frequency=1).all()
+  
+  [<Follow: Follow object>, <Follow: Follow object>]
+
+>>> fols = users.last().follow_set.filter(frequency=1).all()
+
+>>> dir(fols)
+    
+    ['__and__', '__bool__', '__class__', '__deepcopy__', '__delattr__', '__dict__', '__doc__', '__format__', '__getattribute__', '__getitem__', '__getstate__', '__hash__', '__init__', '__iter__', '__len__', '__module__', '__new__', '__nonzero__', '__or__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__setstate__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_add_hints', '_as_sql', '_batched_insert', '_clone', '_create_object_from_params', '_db', '_earliest_or_latest', '_extract_model_params', '_fetch_all', '_filter_or_exclude', '_for_write', '_has_filters', '_hints', '_insert', '_known_related_objects', '_merge_known_related_objects', '_merge_sanity_check', '_next_is_sticky', '_populate_pk_values', '_prefetch_done', '_prefetch_related_lookups', '_prefetch_related_objects', '_prepare', '_raw_delete', '_result_cache', '_setup_aggregate_query', '_sticky_filter', '_update', 'aggregate', 'all', 'annotate', 'as_manager', 'bulk_create', 'complex_filter', 'count', 'create', 'dates', 'datetimes', 'db', 'defer', 'delete', 'distinct', 'earliest', 'exclude', 'exists', 'extra', 'filter', 'first', 'get', 'get_or_create', 'in_bulk', 'is_compatible_query_object_type', 'iterator', 'last', 'latest', 'model', 'none', 'only', 'order_by', 'ordered', 'prefetch_related', 'query', 'raw', 'reverse', 'select_for_update', 'select_related', 'update', 'update_or_create', 'using', 'value_annotation', 'values', 'values_list']
+
+>>> fols.values
+
+    <bound method QuerySet.values of [<Follow: Follow object>, <Follow: Follow object>]>
+
+>>> dir(fols)
+    
+    ['__and__', '__bool__', '__class__', '__deepcopy__', '__delattr__', '__dict__', '__doc__', '__format__', '__getattribute__', '__getitem__', '__getstate__', '__hash__', '__init__', '__iter__', '__len__', '__module__', '__new__', '__nonzero__', '__or__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__setstate__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_add_hints', '_as_sql', '_batched_insert', '_clone', '_create_object_from_params', '_db', '_earliest_or_latest', '_extract_model_params', '_fetch_all', '_filter_or_exclude', '_for_write', '_has_filters', '_hints', '_insert', '_known_related_objects', '_merge_known_related_objects', '_merge_sanity_check', '_next_is_sticky', '_populate_pk_values', '_prefetch_done', '_prefetch_related_lookups', '_prefetch_related_objects', '_prepare', '_raw_delete', '_result_cache', '_setup_aggregate_query', '_sticky_filter', '_update', 'aggregate', 'all', 'annotate', 'as_manager', 'bulk_create', 'complex_filter', 'count', 'create', 'dates', 'datetimes', 'db', 'defer', 'delete', 'distinct', 'earliest', 'exclude', 'exists', 'extra', 'filter', 'first', 'get', 'get_or_create', 'in_bulk', 'is_compatible_query_object_type', 'iterator', 'last', 'latest', 'model', 'none', 'only', 'order_by', 'ordered', 'prefetch_related', 'query', 'raw', 'reverse', 'select_for_update', 'select_related', 'update', 'update_or_create', 'using', 'value_annotation', 'values', 'values_list']
+
+>>> fols.last
+    
+    <bound method QuerySet.last of [<Follow: Follow object>, <Follow: Follow object>]>
+
+>>> fols.last()
+    
+    <Follow: Follow object>
+
+>>> fols.last().post
+  
+    <Post: build awesome company brand and culture>
+
+>>> type(fols)
+    
+    <class 'django.db.models.query.QuerySet'>
+
+>>> fols.values_list('post')
+    
+    [(34,), (30,)]
+
+>>> folsid = fols.values_list('post')
+
+
+>>> dir(folsid)
+
+    ['__and__', '__bool__', '__class__', '__deepcopy__', '__delattr__', '__dict__', '__doc__', '__format__', '__getattribute__', '__getitem__', '__getstate__', '__hash__', '__init__', '__iter__', '__len__', '__module__', '__new__', '__nonzero__', '__or__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__setstate__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_add_hints', '_as_sql', '_base_queryset_class', '_batched_insert', '_clone', '_create_object_from_params', '_db', '_earliest_or_latest', '_extract_model_params', '_fetch_all', '_fields', '_filter_or_exclude', '_for_write', '_has_filters', '_hints', '_insert', '_known_related_objects', '_merge_known_related_objects', '_merge_sanity_check', '_next_is_sticky', '_populate_pk_values', '_prefetch_done', '_prefetch_related_lookups', '_prefetch_related_objects', '_prepare', '_raw_delete', '_result_cache', '_setup_aggregate_query', '_setup_query', '_specialized_queryset_class', '_sticky_filter', '_update', 'aggregate', 'all', 'annotate', 'annotation_names', 'as_manager', 'bulk_create', 'complex_filter', 'count', 'create', 'dates', 'datetimes', 'db', 'defer', 'delete', 'distinct', 'earliest', 'exclude', 'exists', 'extra', 'extra_names', 'field_names', 'filter', 'first', 'flat', 'get', 'get_or_create', 'in_bulk', 'is_compatible_query_object_type', 'iterator', 'last', 'latest', 'model', 'none', 'only', 'order_by', 'ordered', 'prefetch_related', 'query', 'raw', 'reverse', 'select_for_update', 'select_related', 'update', 'update_or_create', 'using', 'value_annotation', 'values', 'values_list']
+
+>>> folsid.values
+
+    <bound method ValuesListQuerySet.values of [(34,), (30,)]>
+
+>>> Post.objects.filter(id=34)
+
+    [<Post: build awesome company brand and culture>]
+
+
+>>> fols.values_list('post')
+
+    [(34,), (30,)]
+
+>>> Post.objects.filter(id__in=folsid)
+    
+    [<Post: build an ambitious company>, <Post: build awesome company brand and culture>]
+
+>>> Post.objects.filter(id__in=folsid)
+    
+    [<Post: build an ambitious company>, <Post: build awesome company brand and culture>]
+
+>>> folsid
+    
+    [(34,), (37,)]
+
+>>> liked_posts = Post.objects.filter(likes=1)
+
+>>> liked_posts
+
+    [<Post: have more confidence>, <Post: be influential>, <Post: have more creative ideas>, <Post: hire the best startup team members>, <Post: have shorter meetings>, <Post: another post>]
+
+
+>>> User.objects.last()
+
+    <User: mike>
+
+>>> mike = User.objects.last()
+
+>>> mike
+
+    <User: mike>
+
+>>> mike.pk
+    
+    16
+
+>>> liked_posts = Post.objects.filter(likes=16)
+
+>>> liked_posts
+    
+    [<Post: hire the best startup team members>, <Post: have more creative ideas>, <Post: have shorter meetings>, <Post: find your career calling>, <Post: make better career decisions>, <Post: build awesome company brand and culture>, <Post: hire the best startup team members>, <Post: cultivate focus>]
+
+>>> liked_posts.exclude(id__in=folsid)
+
+    [<Post: hire the best startup team members>, <Post: have more creative ideas>, <Post: have shorter meetings>, <Post: find your career calling>, <Post: make better career decisions>, <Post: hire the best startup team members>, <Post: cultivate focus>]
+
+>>> fols_week = users.last().follow_set.filter(frequency=3).all()
+
+>>> fols_week.values
+    
+    <bound method QuerySet.values of [<Follow: Follow object>, <Follow: Follow object>, <Follow: Follow object>, <Follow: Follow object>]>
+
+>>> fols_week.values('id')
+
+    [{'id': 127}, {'id': 128}, {'id': 132}, {'id': 137}]
+
+
+
+>>> fols_week_id = fols_week.values_list('post')
+
+>>> fols_week_id
+    
+    [(31,), (32,), (16,), (29,)]
+
+
+>>> folsid
+  
+    [(34,), (37,)]
+
+>>> liked_posts
+
+    [<Post: hire the best startup team members>, <Post: have more creative ideas>, <Post: have shorter meetings>, <Post: find your career calling>, <Post: make better career decisions>, <Post: build awesome company brand and culture>, <Post: hire the best startup team members>, <Post: cultivate focus>]
+
+>>> dir(liked_posts)
+
+    ['__and__', '__bool__', '__class__', '__deepcopy__', '__delattr__', '__dict__', '__doc__', '__format__', '__getattribute__', '__getitem__', '__getstate__', '__hash__', '__init__', '__iter__', '__len__', '__module__', '__new__', '__nonzero__', '__or__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__setstate__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_add_hints', '_as_sql', '_batched_insert', '_clone', '_create_object_from_params', '_db', '_earliest_or_latest', '_extract_model_params', '_fetch_all', '_filter_or_exclude', '_for_write', '_has_filters', '_hints', '_insert', '_known_related_objects', '_merge_known_related_objects', '_merge_sanity_check', '_next_is_sticky', '_populate_pk_values', '_prefetch_done', '_prefetch_related_lookups', '_prefetch_related_objects', '_prepare', '_raw_delete', '_result_cache', '_setup_aggregate_query', '_sticky_filter', '_update', 'aggregate', 'all', 'annotate', 'as_manager', 'bulk_create', 'complex_filter', 'count', 'create', 'dates', 'datetimes', 'db', 'defer', 'delete', 'distinct', 'earliest', 'exclude', 'exists', 'extra', 'filter', 'first', 'get', 'get_or_create', 'in_bulk', 'is_compatible_query_object_type', 'iterator', 'last', 'latest', 'model', 'none', 'only', 'order_by', 'ordered', 'prefetch_related', 'query', 'raw', 'reverse', 'select_for_update', 'select_related', 'update', 'update_or_create', 'using', 'value_annotation', 'values', 'values_list']
+
+
+>>> liked_posts.values('id')
+
+    [{'id': 33}, {'id': 14}, {'id': 15}, {'id': 27}, {'id': 29}, {'id': 34}, {'id': 31}, {'id': 38}]
+
+>>> liked_posts.values_list('id')
+
+    [(33,), (14,), (15,), (27,), (29,), (34,), (31,), (38,)]
+
+>>> folsid
+
+    [(34,), (37,)]
+
+>>> user
+    
+    <User: mhinckley>
+
+>>> dir(user)
+    
+    ['DoesNotExist', 'Meta', 'MultipleObjectsReturned', 'REQUIRED_FIELDS', 'USERNAME_FIELD', '__class__', '__delattr__', '__dict__', '__doc__', '__eq__', '__format__', '__getattribute__', '__hash__', '__init__', u'__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__setstate__', '__sizeof__', '__str__', '__subclasshook__', '__unicode__', '__weakref__', '_base_manager', '_check_column_name_clashes', '_check_field_name_clashes', '_check_fields', '_check_id_field', '_check_index_together', '_check_local_fields', '_check_long_column_names', '_check_m2m_through_same_relationship', '_check_managers', '_check_model', '_check_ordering', '_check_swappable', '_check_unique_together', '_default_manager', '_deferred', '_do_insert', '_do_update', '_get_FIELD_display', '_get_next_or_previous_by_FIELD', '_get_next_or_previous_in_order', '_get_pk_val', '_get_unique_checks', '_meta', '_perform_date_checks', '_perform_unique_checks', '_save_parents', '_save_table', '_set_pk_val', '_state', 'check', 'check_password', 'clean', 'clean_fields', 'comment_set', 'date_error_message', 'date_joined', 'delete', 'email', 'email_user', 'first_name', 'follow_set', 'from_db', 'full_clean', 'get_all_permissions', 'get_deferred_fields', 'get_full_name', 'get_group_permissions', 'get_next_by_date_joined', 'get_previous_by_date_joined', 'get_session_auth_hash', 'get_short_name', 'get_username', 'groups', 'has_module_perms', 'has_perm', 'has_perms', 'has_usable_password', 'id', 'is_active', 'is_anonymous', 'is_authenticated', 'is_staff', 'is_superuser', 'last_login', 'last_name', 'likes', 'logentry_set', 'natural_key', 'objects', 'password', 'pk', 'post_set', 'prepare_database_save', 'proof_set', 'refresh_from_db', 'save', 'save_base', 'serializable_value', 'set_password', 'set_unusable_password', 'unique_error_message', 'user_permissions', 'username', 'validate_unique']
+
+>>> user.email
+    
+    u''
+
+>>> user
+
+    <User: mhinckley>
+
+>>> User.objects.all()
+
+    [<User: mike>, <User: mhinckley>]
+
+>>> User.objects.all().first
+    
+    <bound method QuerySet.first of [<User: mike>, <User: mhinckley>]>
+
+>>> User.objects.all().first()
+    
+    <User: mhinckley>
+
+>>> User.objects.all().last()
+    
+    <User: mike>
+
+>>> User.objects.all().last().email
+
+    u'michael.a.hinckley@gmail.com'
+
+>>> dir(User)
+['DoesNotExist', 'Meta', 'MultipleObjectsReturned', 'REQUIRED_FIELDS', 'USERNAME_FIELD', '__class__', '__delattr__', '__dict__', '__doc__', '__eq__', '__format__', '__getattribute__', '__hash__', '__init__', u'__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__setstate__', '__sizeof__', '__str__', '__subclasshook__', '__unicode__', '__weakref__', '_base_manager', '_check_column_name_clashes', '_check_field_name_clashes', '_check_fields', '_check_id_field', '_check_index_together', '_check_local_fields', '_check_long_column_names', '_check_m2m_through_same_relationship', '_check_managers', '_check_model', '_check_ordering', '_check_swappable', '_check_unique_together', '_default_manager', '_deferred', '_do_insert', '_do_update', '_get_FIELD_display', '_get_next_or_previous_by_FIELD', '_get_next_or_previous_in_order', '_get_pk_val', '_get_unique_checks', '_meta', '_perform_date_checks', '_perform_unique_checks', '_save_parents', '_save_table', '_set_pk_val', 'check', 'check_password', 'clean', 'clean_fields', 'comment_set', 'date_error_message', 'delete', 'email_user', 'follow_set', 'from_db', 'full_clean', 'get_all_permissions', 'get_deferred_fields', 'get_full_name', 'get_group_permissions', 'get_next_by_date_joined', 'get_previous_by_date_joined', 'get_session_auth_hash', 'get_short_name', 'get_username', 'groups', 'has_module_perms', 'has_perm', 'has_perms', 'has_usable_password', 'is_active', 'is_anonymous', 'is_authenticated', 'likes', 'logentry_set', 'natural_key', 'objects', 'pk', 'post_set', 'prepare_database_save', 'proof_set', 'refresh_from_db', 'save', 'save_base', 'serializable_value', 'set_password', 'set_unusable_password', 'unique_error_message', 'user_permissions', 'validate_unique']
+
+
+>>> Post.objects.filter(author=mike)
+[<Post: another post>, <Post: have more confidence>, <Post: have more creative ideas>, <Post: have shorter meetings>, <Post: be influential>, <Post: be a better boyfriend>, <Post: hire the best startup team members>, <Post: build awesome company brand and culture>, <Post: floating>, <Post: hello>, <Post: hello>, <Post: cultivate focus>]
+
+
+>>> Post.objects.filter(author=mike).first
+<bound method QuerySet.first of [<Post: another post>, <Post: have more confidence>, <Post: have more creative ideas>, <Post: have shorter meetings>, <Post: be influential>, <Post: be a better boyfriend>, <Post: hire the best startup team members>, <Post: build awesome company brand and culture>, <Post: floating>, <Post: hello>, <Post: hello>, <Post: cultivate focus>]>
+
+
+>>> Post.objects.filter(author=mike).last
+<bound method QuerySet.last of [<Post: another post>, <Post: have more confidence>, <Post: have more creative ideas>, <Post: have shorter meetings>, <Post: be influential>, <Post: be a better boyfriend>, <Post: hire the best startup team members>, <Post: build awesome company brand and culture>, <Post: floating>, <Post: hello>, <Post: hello>, <Post: cultivate focus>]>
+
+
+
+>>> Post.objects.filter(author=mike)[1]
+<Post: have more confidence>
+
+
+>>> Post.objects.filter(author=mike)[1]
+<Post: have more confidence>
+
+
+>>> Post.objects.filter(author=mike)[1].proof_set
+<django.db.models.fields.related.RelatedManager object at 0x110022550>
+
+
+>>> Post.objects.filter(author=mike)[1].proof_set.all
+<bound method RelatedManager.all of <django.db.models.fields.related.RelatedManager object at 0x11001d9d0>>
+
+>>> Post.objects.filter(author=mike)[1].proof_set.values
+<bound method RelatedManager.values of <django.db.models.fields.related.RelatedManager object at 0x11001d9d0>>
+
+>>> Post.objects.filter(author=mike)[1].proof_set
+<django.db.models.fields.related.RelatedManager object at 0x11001d610>
+
+>>> Post.objects.filter(author=mike)[1].proof_set.all
+<bound method RelatedManager.all of <django.db.models.fields.related.RelatedManager object at 0x11001d9d0>>
+
+>>> post = Post.objects.filter(author=mike)[1]
+
+>>> post
+<Post: have more confidence>
+
+
+
+>>> post = Post.objects.filter(author=mike)[10]
+>>> post
+<Post: hello>
+>>> post = Post.objects.filter(author=mike)[8]
+>>> post
+<Post: floating>
+
+>>> Post.objects.filter(author=mike)[1].proof_set.all
+<bound method RelatedManager.all of <django.db.models.fields.related.RelatedManager object at 0x1100556d0>>
+>>> post.proof_set.all
+<bound method RelatedManager.all of <django.db.models.fields.related.RelatedManager object at 0x110055990>>
+
+>>> post.proof_set.all
+<bound method RelatedManager.all of <django.db.models.fields.related.RelatedManager object at 0x11005ead0>>
+
+>>> post = Post.objects.filter(author=mike)[2]
+
+>>> post
+<Post: have more creative ideas>
+
+>>> post = Post.objects.filter(pk=34)
+
+>>> post
+[<Post: build awesome company brand and culture>]
+
+>>> dir(post)
+['__and__', '__bool__', '__class__', '__deepcopy__', '__delattr__', '__dict__', '__doc__', '__format__', '__getattribute__', '__getitem__', '__getstate__', '__hash__', '__init__', '__iter__', '__len__', '__module__', '__new__', '__nonzero__', '__or__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__setstate__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_add_hints', '_as_sql', '_batched_insert', '_clone', '_create_object_from_params', '_db', '_earliest_or_latest', '_extract_model_params', '_fetch_all', '_filter_or_exclude', '_for_write', '_has_filters', '_hints', '_insert', '_known_related_objects', '_merge_known_related_objects', '_merge_sanity_check', '_next_is_sticky', '_populate_pk_values', '_prefetch_done', '_prefetch_related_lookups', '_prefetch_related_objects', '_prepare', '_raw_delete', '_result_cache', '_setup_aggregate_query', '_sticky_filter', '_update', 'aggregate', 'all', 'annotate', 'as_manager', 'bulk_create', 'complex_filter', 'count', 'create', 'dates', 'datetimes', 'db', 'defer', 'delete', 'distinct', 'earliest', 'exclude', 'exists', 'extra', 'filter', 'first', 'get', 'get_or_create', 'in_bulk', 'is_compatible_query_object_type', 'iterator', 'last', 'latest', 'model', 'none', 'only', 'order_by', 'ordered', 'prefetch_related', 'query', 'raw', 'reverse', 'select_for_update', 'select_related', 'update', 'update_or_create', 'using', 'value_annotation', 'values', 'values_list']
+
+
+>>> dir(Post.objects)
+['__class__', '__delattr__', '__dict__', '__doc__', '__eq__', '__format__', '__getattribute__', '__hash__', '__init__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__slotnames__', '__str__', '__subclasshook__', '__unicode__', '__weakref__', '_constructor_args', '_copy_to_model', '_db', '_get_queryset_methods', '_hints', '_inherited', '_insert', '_queryset_class', '_set_creation_counter', '_update', 'aggregate', 'all', 'annotate', 'bulk_create', 'check', 'complex_filter', 'contribute_to_class', 'count', 'create', 'creation_counter', 'dates', 'datetimes', 'db', 'db_manager', 'deconstruct', 'defer', 'distinct', 'earliest', 'exclude', 'exists', 'extra', 'filter', 'first', 'from_queryset', 'get', 'get_or_create', 'get_queryset', 'in_bulk', 'iterator', 'last', 'latest', 'model', 'name', 'none', 'only', 'order_by', 'prefetch_related', 'raw', 'reverse', 'select_for_update', 'select_related', 'update', 'update_or_create', 'use_in_migrations', 'using', 'values', 'values_list']
+
+>>> Post.objects.filter()
+[<Post: another post>, <Post: have more confidence>, <Post: have more creative ideas>, <Post: have shorter meetings>, <Post: be influential>, <Post: be "great">, <Post: find your career calling>, <Post: get a check from Len Lodish>, <Post: make better career decisions>, <Post: build an ambitious company>, <Post: hire the best startup team members>, <Post: be a better boyfriend>, <Post: hire the best startup team members>, <Post: build awesome company brand and culture>, <Post: floating>, <Post: hello>, <Post: hello>, <Post: cultivate focus>]
+
+>>> dir(Post.objects.filter())
+['__and__', '__bool__', '__class__', '__deepcopy__', '__delattr__', '__dict__', '__doc__', '__format__', '__getattribute__', '__getitem__', '__getstate__', '__hash__', '__init__', '__iter__', '__len__', '__module__', '__new__', '__nonzero__', '__or__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__setstate__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_add_hints', '_as_sql', '_batched_insert', '_clone', '_create_object_from_params', '_db', '_earliest_or_latest', '_extract_model_params', '_fetch_all', '_filter_or_exclude', '_for_write', '_has_filters', '_hints', '_insert', '_known_related_objects', '_merge_known_related_objects', '_merge_sanity_check', '_next_is_sticky', '_populate_pk_values', '_prefetch_done', '_prefetch_related_lookups', '_prefetch_related_objects', '_prepare', '_raw_delete', '_result_cache', '_setup_aggregate_query', '_sticky_filter', '_update', 'aggregate', 'all', 'annotate', 'as_manager', 'bulk_create', 'complex_filter', 'count', 'create', 'dates', 'datetimes', 'db', 'defer', 'delete', 'distinct', 'earliest', 'exclude', 'exists', 'extra', 'filter', 'first', 'get', 'get_or_create', 'in_bulk', 'is_compatible_query_object_type', 'iterator', 'last', 'latest', 'model', 'none', 'only', 'order_by', 'ordered', 'prefetch_related', 'query', 'raw', 'reverse', 'select_for_update', 'select_related', 'update', 'update_or_create', 'using', 'value_annotation', 'values', 'values_list']
+
+
+
+
+
+
+
+###### PROOFS
+
+
+>>> from board.models import Proof
+
+>>> Proof.objects.filter()
+[<Proof: Proof object>, <Proof: Proof object>, <Proof: Proof object>, <Proof: Proof object>, <Proof: Proof object>, <Proof: Proof object>, <Proof: Proof object>, <Proof: Proof object>, <Proof: Proof object>, <Proof: Proof object>, <Proof: Proof object>]
+
+
+>>> Proof.objects.filter(person="Tony Schwartz (Author)")
+[]
+
+>>> Proof.objects.filter(person="Tony Schwartz (Author)")
+[]
+
+>>> Proof.objects.filter(person="Steve Newcomb")
+[<Proof: Proof object>, <Proof: Proof object>]
+
+>>> Proof.objects.filter(person__iexact="Steve Newcomb")
+[<Proof: Proof object>, <Proof: Proof object>]
+
+>>> proofs = Proof.objects.filter(person__iexact="Steve Newcomb")
+
+>>> dir(proofs)
+['__and__', '__bool__', '__class__', '__deepcopy__', '__delattr__', '__dict__', '__doc__', '__format__', '__getattribute__', '__getitem__', '__getstate__', '__hash__', '__init__', '__iter__', '__len__', '__module__', '__new__', '__nonzero__', '__or__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__setstate__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_add_hints', '_as_sql', '_batched_insert', '_clone', '_create_object_from_params', '_db', '_earliest_or_latest', '_extract_model_params', '_fetch_all', '_filter_or_exclude', '_for_write', '_has_filters', '_hints', '_insert', '_known_related_objects', '_merge_known_related_objects', '_merge_sanity_check', '_next_is_sticky', '_populate_pk_values', '_prefetch_done', '_prefetch_related_lookups', '_prefetch_related_objects', '_prepare', '_raw_delete', '_result_cache', '_setup_aggregate_query', '_sticky_filter', '_update', 'aggregate', 'all', 'annotate', 'as_manager', 'bulk_create', 'complex_filter', 'count', 'create', 'dates', 'datetimes', 'db', 'defer', 'delete', 'distinct', 'earliest', 'exclude', 'exists', 'extra', 'filter', 'first', 'get', 'get_or_create', 'in_bulk', 'is_compatible_query_object_type', 'iterator', 'last', 'latest', 'model', 'none', 'only', 'order_by', 'ordered', 'prefetch_related', 'query', 'raw', 'reverse', 'select_for_update', 'select_related', 'update', 'update_or_create', 'using', 'value_annotation', 'values', 'values_list']
+
+>>> proofs
+[<Proof: Proof object>, <Proof: Proof object>]
+
+>>> Post
+<class 'board.models.Post'>
+
+>>> dir(Post)
+['DoesNotExist', 'MultipleObjectsReturned', '__class__', '__delattr__', '__dict__', '__doc__', '__eq__', '__format__', '__getattribute__', '__hash__', '__init__', u'__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__setstate__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_base_manager', '_check_column_name_clashes', '_check_field_name_clashes', '_check_fields', '_check_id_field', '_check_index_together', '_check_local_fields', '_check_long_column_names', '_check_m2m_through_same_relationship', '_check_managers', '_check_model', '_check_ordering', '_check_swappable', '_check_unique_together', '_default_manager', '_deferred', '_do_insert', '_do_update', '_get_FIELD_display', '_get_next_or_previous_by_FIELD', '_get_next_or_previous_in_order', '_get_pk_val', '_get_unique_checks', '_meta', '_perform_date_checks', '_perform_unique_checks', '_save_parents', '_save_table', '_set_pk_val', 'author', 'check', 'clean', 'clean_fields', 'comment_set', 'date_error_message', 'delete', 'follow_set', 'from_db', 'full_clean', 'get_deferred_fields', 'get_next_by_published_date', 'get_previous_by_published_date', 'likes', 'objects', 'pk', 'posttag_set', 'prepare_database_save', 'proof_set', 'publish', 'refresh_from_db', 'save', 'save_base', 'serializable_value', 'total_all_follows', 'total_comments', 'total_daily', 'total_follows', 'total_likes', 'total_monthly', 'total_weekly', 'unique_error_message', 'update_tags', 'validate_unique']
+
+>>> Post.proof_set
+<django.db.models.fields.related.ForeignRelatedObjectsDescriptor object at 0x10fe280d0>
+
+>>> dir(Post.proof_set)
+['__class__', '__delattr__', '__dict__', '__doc__', '__format__', '__get__', '__getattribute__', '__hash__', '__init__', '__module__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__set__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', 'related', 'related_manager_cls']
+
+>>> proofs.values('pk')
+[{'pk': 2}, {'pk': 7}]
+
+>>> proofs_id = proofs.values('pk')
+
+>>> dir(Post)
+['DoesNotExist', 'MultipleObjectsReturned', '__class__', '__delattr__', '__dict__', '__doc__', '__eq__', '__format__', '__getattribute__', '__hash__', '__init__', u'__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__setstate__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_base_manager', '_check_column_name_clashes', '_check_field_name_clashes', '_check_fields', '_check_id_field', '_check_index_together', '_check_local_fields', '_check_long_column_names', '_check_m2m_through_same_relationship', '_check_managers', '_check_model', '_check_ordering', '_check_swappable', '_check_unique_together', '_default_manager', '_deferred', '_do_insert', '_do_update', '_get_FIELD_display', '_get_next_or_previous_by_FIELD', '_get_next_or_previous_in_order', '_get_pk_val', '_get_unique_checks', '_meta', '_perform_date_checks', '_perform_unique_checks', '_save_parents', '_save_table', '_set_pk_val', 'author', 'check', 'clean', 'clean_fields', 'comment_set', 'date_error_message', 'delete', 'follow_set', 'from_db', 'full_clean', 'get_deferred_fields', 'get_next_by_published_date', 'get_previous_by_published_date', 'likes', 'objects', 'pk', 'posttag_set', 'prepare_database_save', 'proof_set', 'publish', 'refresh_from_db', 'save', 'save_base', 'serializable_value', 'total_all_follows', 'total_comments', 'total_daily', 'total_follows', 'total_likes', 'total_monthly', 'total_weekly', 'unique_error_message', 'update_tags', 'validate_unique']
+
+>>> proofs
+[<Proof: Proof object>, <Proof: Proof object>]
+
+>>> proofs[1]
+<Proof: Proof object>
+
+>>> proof = proofs[1]
+
+>>> Post.objects.filter(proof__person='Steve Newcomb')
+[<Post: hire the best startup team members>, <Post: build awesome company brand and culture>]
+
+>>> Post.objects.filter(proof__person__iexact='Steve Newcomb')
+[<Post: hire the best startup team members>, <Post: build awesome company brand and culture>]
+
+>>> newcombposts = Post.objects.filter(proof__person__iexact='Steve Newcomb')
+
+>>> newc = Post.objects.filter(proof__person__iexact='Steve Newcomb')
+
+>>> newc
+[<Post: hire the best startup team members>, <Post: build awesome company brand and culture>]
+
+>>> newcombposts
+[<Post: hire the best startup team members>, <Post: build awesome company brand and culture>]
+
+>>> combined = newc | newcombposts
+
+>>> combined
+[<Post: hire the best startup team members>, <Post: build awesome company brand and culture>]
+
+>>> post
+[<Post: build awesome company brand and culture>]
+
+
+>>> dir(post)
+['__and__', '__bool__', '__class__', '__deepcopy__', '__delattr__', '__dict__', '__doc__', '__format__', '__getattribute__', '__getitem__', '__getstate__', '__hash__', '__init__', '__iter__', '__len__', '__module__', '__new__', '__nonzero__', '__or__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__setstate__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_add_hints', '_as_sql', '_batched_insert', '_clone', '_create_object_from_params', '_db', '_earliest_or_latest', '_extract_model_params', '_fetch_all', '_filter_or_exclude', '_for_write', '_has_filters', '_hints', '_insert', '_known_related_objects', '_merge_known_related_objects', '_merge_sanity_check', '_next_is_sticky', '_populate_pk_values', '_prefetch_done', '_prefetch_related_lookups', '_prefetch_related_objects', '_prepare', '_raw_delete', '_result_cache', '_setup_aggregate_query', '_sticky_filter', '_update', 'aggregate', 'all', 'annotate', 'as_manager', 'bulk_create', 'complex_filter', 'count', 'create', 'dates', 'datetimes', 'db', 'defer', 'delete', 'distinct', 'earliest', 'exclude', 'exists', 'extra', 'filter', 'first', 'get', 'get_or_create', 'in_bulk', 'is_compatible_query_object_type', 'iterator', 'last', 'latest', 'model', 'none', 'only', 'order_by', 'ordered', 'prefetch_related', 'query', 'raw', 'reverse', 'select_for_update', 'select_related', 'update', 'update_or_create', 'using', 'value_annotation', 'values', 'values_list']
+
+>>> dir(post.values)
+['__call__', '__class__', '__cmp__', '__delattr__', '__doc__', '__format__', '__func__', '__get__', '__getattribute__', '__hash__', '__init__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__self__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', 'im_class', 'im_func', 'im_self']
+
+
+>>> dir(post)
+['__and__', '__bool__', '__class__', '__deepcopy__', '__delattr__', '__dict__', '__doc__', '__format__', '__getattribute__', '__getitem__', '__getstate__', '__hash__', '__init__', '__iter__', '__len__', '__module__', '__new__', '__nonzero__', '__or__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__setstate__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_add_hints', '_as_sql', '_batched_insert', '_clone', '_create_object_from_params', '_db', '_earliest_or_latest', '_extract_model_params', '_fetch_all', '_filter_or_exclude', '_for_write', '_has_filters', '_hints', '_insert', '_known_related_objects', '_merge_known_related_objects', '_merge_sanity_check', '_next_is_sticky', '_populate_pk_values', '_prefetch_done', '_prefetch_related_lookups', '_prefetch_related_objects', '_prepare', '_raw_delete', '_result_cache', '_setup_aggregate_query', '_sticky_filter', '_update', 'aggregate', 'all', 'annotate', 'as_manager', 'bulk_create', 'complex_filter', 'count', 'create', 'dates', 'datetimes', 'db', 'defer', 'delete', 'distinct', 'earliest', 'exclude', 'exists', 'extra', 'filter', 'first', 'get', 'get_or_create', 'in_bulk', 'is_compatible_query_object_type', 'iterator', 'last', 'latest', 'model', 'none', 'only', 'order_by', 'ordered', 'prefetch_related', 'query', 'raw', 'reverse', 'select_for_update', 'select_related', 'update', 'update_or_create', 'using', 'value_annotation', 'values', 'values_list']
+
+>>> Proof.objects.filter(post=post)
+[<Proof: Proof object>, <Proof: Proof object>, <Proof: Proof object>, <Proof: Proof object>]
+
+>>> post
+[<Post: build awesome company brand and culture>]
+
+>>> dir(Proof.objects.filter(post=post))
+['__and__', '__bool__', '__class__', '__deepcopy__', '__delattr__', '__dict__', '__doc__', '__format__', '__getattribute__', '__getitem__', '__getstate__', '__hash__', '__init__', '__iter__', '__len__', '__module__', '__new__', '__nonzero__', '__or__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__setstate__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_add_hints', '_as_sql', '_batched_insert', '_clone', '_create_object_from_params', '_db', '_earliest_or_latest', '_extract_model_params', '_fetch_all', '_filter_or_exclude', '_for_write', '_has_filters', '_hints', '_insert', '_known_related_objects', '_merge_known_related_objects', '_merge_sanity_check', '_next_is_sticky', '_populate_pk_values', '_prefetch_done', '_prefetch_related_lookups', '_prefetch_related_objects', '_prepare', '_raw_delete', '_result_cache', '_setup_aggregate_query', '_sticky_filter', '_update', 'aggregate', 'all', 'annotate', 'as_manager', 'bulk_create', 'complex_filter', 'count', 'create', 'dates', 'datetimes', 'db', 'defer', 'delete', 'distinct', 'earliest', 'exclude', 'exists', 'extra', 'filter', 'first', 'get', 'get_or_create', 'in_bulk', 'is_compatible_query_object_type', 'iterator', 'last', 'latest', 'model', 'none', 'only', 'order_by', 'ordered', 'prefetch_related', 'query', 'raw', 'reverse', 'select_for_update', 'select_related', 'update', 'update_or_create', 'using', 'value_annotation', 'values', 'values_list']
+
+>>> Proof.objects.filter(post=post).values('person')
+[{'person': u"This is a test and I'm not sure if lkaje; lja ;sldkjf a;lskdjf a;lskdjf a;lskdj f;alksdj f;alksjd f;"}, {'person': u'Steve Newcomb'}, {'person': u'Chip Conley (Airbnb)'}, {'person': u'Steve Newcomb (Powerset)'}]
+
+
+>>> proof
+<Proof: Proof object>
+
+>>> post
+[<Post: build awesome company brand and culture>]
+
+>>> post.values
+<bound method QuerySet.values of [<Post: build awesome company brand and culture>]>
+
+>>> post.values('person')
+[{'person': None}]
+
+>>> post.model
+<class 'board.models.Post'>
+
+
+
+
+
+#### DATE AND TIME
+
+>>> from datetime import datetime, date, time
+>>> datetime.day
+<attribute 'day' of 'datetime.date' objects>
+>>> datetime.day()
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+TypeError: 'getset_descriptor' object is not callable
+>>> now = datetime.now()
+>>> now.day
+1
+>>> now.week
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+AttributeError: 'datetime.datetime' object has no attribute 'week'
+>>> now.isoweekday
+<built-in method isoweekday of datetime.datetime object at 0x1104c1ad0>
+>>> now.weekdayy
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+AttributeError: 'datetime.datetime' object has no attribute 'weekdayy'
+>>> now.weekday
+<built-in method weekday of datetime.datetime object at 0x1104c1ad0>
+>>> now.weekday()
+6
+>>> now.day
+1
+
+
+>>> now.day
+1
+>>> now.weekday
+<built-in method weekday of datetime.datetime object at 0x1104c1ad0>
+>>> now.date()
+datetime.date(2017, 1, 1)
+>>> now.day
+1
+>>> now.weekday()
+6
+
+
+>>> from django.contrib.sites.models import Site
+>>> Site.objects.all()[0]
+<Site: example.com>
+>>> one = Site.objects.all()[0]
+>>> one
+<Site: example.com>
+>>> one.domain = 'toolkiit.com'
+>>> one.name = 'Tookiit'
+>>> one.save()
+>>> Site.objects.all()[0]
+<Site: toolkiit.com>
+>>> user
+<User: mhinckley>
+>>> user.username
+u'mhinckley'
+>>> str(user.username)
+'mhinckley'
+>>> one.domain = 'www.toolkiit.com'
+>>> one.save()
+>>> Site.objects.all()[0]
+<Site: www.toolkiit.com>
+>>> 
